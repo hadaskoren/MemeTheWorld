@@ -1,16 +1,28 @@
 .nav-bar {
   background-color: #323232;
-  height: 60px;
+  height: 63px;
 }
 
 .nav-bar-items {
-    width: 500px;
+    width: 300px;
     margin: auto;
     height: 100%;
     color: white;
-    font-family: LatoBold;
+    font-family: var(--primary-font);
 }
 
 .nav-bar-item {
-    padding-right: em(25px);
+    font-size: rem(10px);
 }
+
+.nav-bar-random-dot {
+    opacity: 0.1;
+}
+
+.pointy-thingy {
+    margin: auto;
+}
+
+/*.logo-img {
+    background-image: url("assets/img/pointy-thingy.png");
+}*/
