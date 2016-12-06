@@ -3,20 +3,24 @@ console.log('Hello Meme');
 
 'use strict';
 
-function renderImages() {
-    // // Create a clone from the template
-    // var elClonedImageTemplate = document.querySelector('.imageTemplate').cloneNode(true);
-  
-    // var elMemesGallery = document.querySelector('.memes-gallery');
-    // elMemesGallery.appendChild(elClonedImageTemplate);
-    
+function loaded() {
+    createImages();
 }
 
-//------TODO: This doesn't work except for the log'
+var gElements = {
+    elSearchMemes : document.querySelector('.search-memes'),
+    elMemesGallery : document.querySelector('.memes-gallery'),
+    elGalleryEditor : document.querySelector('.gallery-editor')
+}
+
 function memeEditor() {
-    console.log('EDITOR!');
-    var editor = document.querySelector('.gallery-editor');
-    var gallery = document.querySelector('.gallery');
-    gallery.display = 'none';
-    editor.display = 'block';
+    gElements.elSearchMemes.style.display = 'none';
+    gElements.elMemesGallery.style.display = 'none';
+    gElements.elGalleryEditor.style.display = 'block';
+}
+
+function backToGallery() {
+    gElements.elSearchMemes.style.display = 'block';
+    gElements.elMemesGallery.style.display = 'block';
+    gElements.elGalleryEditor.style.display = 'none';
 }
