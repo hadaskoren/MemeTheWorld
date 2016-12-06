@@ -1,0 +1,20 @@
+.developer-details {
+    @include for-mobile-only {
+        flex-direction: column;
+    }
+
+    .header-top {
+        display: none;
+        @include for-mobile-only {
+            display: block;
+        }
+    }
+
+    .header-side {
+        display: block;
+        @include for-mobile-only {
+            display: none;
+        }
+    }
+}
+
