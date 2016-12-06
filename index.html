@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
 </head>
 
-<body class="container">
+<body class="container" onload="loaded()">
     <nav class="nav-bar">
         <!--<img class="pointy-thingy" src="assets/img/pointy-thingy.png">-->
         <ul class="flex align-center justify-center space-between clean-list nav-bar-items">
@@ -28,20 +28,19 @@
     <section class="gallery">
         <div class="inner-container">
             <h1>Create Your Meme:</h1>
-            <div class="searchMemes flex space-between">
+            <div class="search-memes flex space-between">
                 <input type="text" class="search-by-keyword">
                 <button class="btn btn-primary toggle-popular-keywords" onclick="togglePopularKeywords()">Popular Keywords</button>
             </div>
             <div class="memes-gallery">
-                <img class="memes-gallery-image" onclick="memeEditor()" />
+                <!--<img class="memes-gallery-image" onclick="memeEditor()" />
                 <img class="memes-gallery-image" />
-                <img class="memes-gallery-image" />
+                <img class="memes-gallery-image" />-->
             </div>
+            <section class="gallery-editor">
+                <button class="back-to-gallery btn btn-link" onclick="backToGallery()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back to list</button>
+            </section>
         </div>
-
-    </section>
-    <section class="gallery-editor">
-
     </section>
 
     <section class="about">
@@ -158,6 +157,8 @@
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/dom.js"></script>
 </body>
 
 </html>
