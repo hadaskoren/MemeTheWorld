@@ -1,8 +1,14 @@
 'use strict';
 
-///////// *** Initiates the meme generator
+///////// *** Initiates the meme generator on window load
 function initApp() {
+    // Assign globals elements
+    gElements.elSearchMemes = document.querySelector('.search-memes'),
+    gElements.elMemesGallery = document.querySelector('.memes-gallery'),
+    gElements.elGalleryEditor = document.querySelector('.gallery-editor')
+    
     createImages();
+
 } // *** End of initApp
 
 ///////// *** Opens the meme editor

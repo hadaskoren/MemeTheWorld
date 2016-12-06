@@ -1,11 +1,7 @@
 'use strict';
 
-// GLOBAL Elements
-var gElements = {
-    elSearchMemes : document.querySelector('.search-memes'),
-    elMemesGallery : document.querySelector('.memes-gallery'),
-    elGalleryEditor : document.querySelector('.gallery-editor')
-}
+// GLOBAL Elements' object
+var gElements = {};
 
 ///////// *** Renders images into DOM from array of images objects
 function renderImages(images) {
