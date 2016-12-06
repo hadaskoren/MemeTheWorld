@@ -1,20 +1,57 @@
-.developer-details {
+.developer-info {
+    font-family: var(--secondary-font);
+    color: var(--font-primary-color);
+
     @include for-mobile-only {
         flex-direction: column;
     }
+}
 
-    .header-top {
-        display: none;
-        @include for-mobile-only {
-            display: block;
-        }
+.developer-info-header {
+    h2 {
+        font-size: rem(30px);
+        margin-top: 0;
     }
 
-    .header-side {
+    h3 {
+        color: var(--font-secondary-color);
+        font-size: rem(18px);
+    }
+    
+}
+
+.dev-omer {
+    background-image: url("/assets/img/devs/OmerZfira.jpg");
+}
+.dev-hadas {
+    background-image: url("/assets/img/devs/HadasKoren.jpg");
+}
+
+.header-top {
+    display: none;
+    @include for-mobile-only {
         display: block;
-        @include for-mobile-only {
-            display: none;
-        }
     }
 }
 
+.header-side {
+    display: block;
+    @include for-mobile-only {
+        display: none;
+    }
+}
+
+.developer-summary {
+
+}
+.developer-info-desc {
+    font-family: var(--primary-font);
+}
+
+
+.developer-img {
+    // width: 206px;
+    // height: 100%;
+    flex-shrink: 0;
+    display: block;
+}
