@@ -7,7 +7,7 @@ function renderImages(images) {
         if(image.url !== "") {
             url = image.url;
         }
-        memesGallery.innerHTML += '<div class="hexagon memes-gallery-image" style="background-image: url(' + url + ');"><div class="hexTop"></div><div class="hexBottom"></div></div>';
+        memesGallery.innerHTML += '<div class="hexagon memes-gallery-image" style="background-image: url(' + url + ');" onclick="memeEditor()"><div class="hexTop"></div><div class="hexBottom"></div></div>';
         console.log('memesGallery',memesGallery); 
     });
 }
