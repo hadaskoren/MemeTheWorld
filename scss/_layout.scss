@@ -5,3 +5,34 @@
   margin: 0 auto;
   padding: 0 1em;
 }
+
+.nav-bar {
+  background-color: #323232;
+  height: 60px;
+}
+
+.gallery {
+  height: 724px;
+}
+
+.about {
+  background-color: #2eb398;
+  height: 336px;
+}
+
+.get-in-touch {
+  background-color: #323232;
+  height: 559px;
+}
+
+.inner-container {
+  width: 820px;
+  margin: 10% auto;
+  margin-bottom: 0;
+  margin-top: 0;
+  border-right: 1px solid black;
+  border-left: 1px solid black;
+  height: 100%;
+  margin-top: em(13px);
+  margin-bottom: em(13px);
+}

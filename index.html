@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="dist/style.css">
 </head>
 
-<body>
-    <nav>
+<body class="container">
+    <nav class="nav-bar">
         <ul>
             <li></li>
             <li></li>
@@ -16,46 +16,57 @@
             <li></li>
         </ul>
     </nav>
-    <section>
-        <h1>Create Your Meme!</h1>
-        <div>
-            <input type="text" class="search-by-keyword">
-            <button class="toggle-popular-keywords" onclick="togglePopularKeywords()"></button>
-        </div>
-        <div class="memes-gallery">
-        </div>
-    </section>
-
-    <section>
-        <article class="">
-            <div class="article-img"></div>
-            <div class="article-info">
-                <div class="article-info-name"></div>
-                <div class="article-info-title"></div>
-                <div class="article-info-desc"></div>
-                <div class="article-info-socials"></div>
+        <section class="gallery">
+            <div class="inner-container">
+                <h1>Create Your Meme!</h1>
+                <div>
+                    <input type="text" class="search-by-keyword">
+                    <button class="toggle-popular-keywords" onclick="togglePopularKeywords()"></button>
+                    <button class="" onclick="renderImages()"></button>
+                </div>
+                <div class="memes-gallery">
+                    <img class="memes-gallery-image"/>
+                </div>
+                
             </div>
-        </article>
-        <article class="">
-            <div class="article-img"></div>
-            <div class="article-info">
-                <div class="article-info-name"></div>
-                <div class="article-info-title"></div>
-                <div class="article-info-desc"></div>
-                <div class="article-info-socials"></div>
+            <div class="gallery-editor">
+
             </div>
-        </article>
-    </section>
+        </section>
+        
+        <section class="about">
+            <div class="inner-container">
+                <article class="">
+                    <div class="article-img"></div>
+                    <div class="article-info">
+                        <div class="article-info-name"></div>
+                        <div class="article-info-title"></div>
+                        <div class="article-info-desc"></div>
+                        <div class="article-info-socials"></div>
+                    </div>
+                
+                </article>
+                <article class="">
+                    <div class="article-img"></div>
+                    <div class="article-info">
+                        <div class="article-info-name"></div>
+                        <div class="article-info-title"></div>
+                        <div class="article-info-desc"></div>
+                        <div class="article-info-socials"></div>
+                    </div>
+                </article>
+            </div>
+        </section>
 
-    <section class="get-in-touch">
-        <div class="get-in-touch-form">
-            
-        </div>
-        <div class="get-in-touch-details">
+        <section class="get-in-touch">
+            <div class="get-in-touch-form">
+                
+            </div>
+            <div class="get-in-touch-details">
 
-        </div>
-    </section>
-
+            </div>
+        </section>
+    </div>
     <footer>
 copyrights 2016 by Hadas&amp;Omer.ltd
     </footer>
