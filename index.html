@@ -9,29 +9,30 @@
 
 <body class="container">
     <nav class="nav-bar">
-        <ul>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
+        <ul class="flex align-center clean-list nav-bar-items">
+            <li class="nav-bar-item"><a href="#">PORTFOLIO</a></li>
+            <li class="nav-bar-item"><a href="#">ABOUT</a></li>
+            <li class="nav-bar-item"><a href="#">BLOG</a></li>
+            <li class="nav-bar-item"><a href="#">GET IN TOUCH</a></li>
         </ul>
     </nav>
         <section class="gallery">
             <div class="inner-container">
-                <h1>Create Your Meme!</h1>
+                <h1>Create Your Meme:</h1>
                 <div>
                     <input type="text" class="search-by-keyword">
                     <button class="toggle-popular-keywords" onclick="togglePopularKeywords()"></button>
-                    <button class="" onclick="renderImages()"></button>
                 </div>
                 <div class="memes-gallery">
+                    <img class="memes-gallery-image" onclick="memeEditor()"/>
+                    <img class="memes-gallery-image"/>
                     <img class="memes-gallery-image"/>
                 </div>
-                
             </div>
-            <div class="gallery-editor">
+            
+        </section>
+        <section class="gallery-editor">
 
-            </div>
         </section>
         
         <section class="about">
@@ -68,7 +69,7 @@
         </section>
     </div>
     <footer>
-copyrights 2016 by Hadas&amp;Omer.ltd
+        copyrights 2016 by Hadas&amp;Omer.ltd
     </footer>
 
     <script src="js/main.js"></script>
