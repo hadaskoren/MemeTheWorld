@@ -1,12 +1,30 @@
 .gallery-editor {
     display: none;
     background-color: grey;
-    height: 600px;
-    width: 700px;
+    height: 617px;
+    width: 777px;
     margin: auto;
 }
 
 .back-to-gallery {
     margin: em(5px);
-    background-color: red;
+}
+
+.edit-text{
+    width: 30%;
+}
+
+.edit-text input {
+    margin-bottom: 9%;
+    margin-left: 5%;
+    margin-top: 35%;
+    padding: 10px;
+}
+
+.delete-top-text {
+    padding: 12px;
+}
+
+.delete-bottom-text {
+    padding: 12px;
 }

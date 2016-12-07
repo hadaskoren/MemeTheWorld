@@ -17,8 +17,13 @@ var gCloudSettings;
 var testKeywords = { aasdfasd: 2, basdfasd: 2, ccxbxb: 4, ddfdfg: 4, eertyerty: 6, ffhfjh: 6, gghjkhjk: 7, hhjklk: 9, iyuiouyio: 9, jkljjkljo: 15 };
 
 
+// GLOBAL meme
+var gMeme = null;
 
-///////// *** Initiates the meme generator on window load
+var gElMemeCanvas = document.querySelector('.memeCanvas');
+var gCtx = gElMemeCanvas.getContext('2d');
+
+//---------------------Initiates the meme generator on window load
 function initApp() {
     var contactUsers = [];
     localStorage['users'] = JSON.stringify(contactUsers);
@@ -27,34 +32,31 @@ function initApp() {
     gAllElements.elMemesGallery = document.querySelector('.memes-gallery');
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
 
+    var elMemeCanvas = document.querySelector('.memeCanvas');
+    var ctx = elMemeCanvas.getContext('2d');
+
     renderImages(gImages);
 }
 
-///////// *** Opens the meme editor
-function memeEditor(imgId) {
-    // Hide gallery
-    gAllElements.elSearchMemes.style.display = 'none';
-    gAllElements.elMemesGallery.style.display = 'none';
-    // Show editor
-    gAllElements.elGalleryEditor.style.display = 'block';
-    // When opens the editor - intiate the canvas with the imageId that was clicked
-    var imgSrc = imgIdToUrl(imgId);
-    initCanvas(imgSrc);
-    if (gPrevSearchKeyword) {
-        updateKeywordsObj(gPrevSearchKeyword);
-    }
+//---------------------Renders images into DOM from array of images objects
+function renderImages(images) {
+    var elMemesGallery = document.querySelector('.memes-gallery');
+    images.forEach(function (image) {
+        // Ask Yaron about URL
+        // if(image.url !== "") {
+        //     url = image.url;
+        // }
+
+        // Add to DOM the HTML tags image after image
+        elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
+            'style="background-image: url(' + imgIdToUrl(image.id) + ');" ' +
+            'onclick="memeEditor(\'' + image.id + '\')">' +
+            '<div class="hexTop"></div><div class="hexBottom"></div></div>';
+    });
 }
 
-///////// *** Initiates the meme generator
-function backToGallery() {
-    // Show gallery
-    gAllElements.elSearchMemes.style.display = 'flex';
-    gAllElements.elMemesGallery.style.display = 'flex';
-    // Hide editor
-    gAllElements.elGalleryEditor.style.display = 'none';
-}
 
-///////// *** Update an object with the keywords that were searched
+//---------------------Update an object with the keywords that were searched
 function updateKeywordsObj(searchedWord) {
     if (!gSearchedKeywordsObj[searchedWord]) {
         gSearchedKeywordsObj[searchedWord] = 1;
@@ -64,8 +66,8 @@ function updateKeywordsObj(searchedWord) {
     console.log('gSearchedKeywordsObj', gSearchedKeywordsObj);
 }
 
-///////// *** Opens popular keywords modal
-// Renders tag cloud into DOM from object of keywords
+//---------------------Popular Keywords panel Open and close
+
 function togglePopularKeywords() {
     gIsKeywordsPanelOpen = !gIsKeywordsPanelOpen;
     var elKeywordsPanel = document.querySelector('.popularKeywords');
@@ -78,6 +80,7 @@ function togglePopularKeywords() {
         renderPopularKeywords();
     }
 }
+
 
 function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
@@ -96,47 +99,86 @@ function renderPopularKeywords() {
     });
     // $('.keywords-cloud').awesomeCloud(gCloudSettings);
 }
-///////// *** Renders images into DOM from array of images objects
-function renderImages(images) {
-    var elMemesGallery = document.querySelector('.memes-gallery');
-    images.forEach(function (image) {
-        // Ask Yaron about URL
-        // if(image.url !== "") {
-        //     url = image.url;
-        // }
 
-        // Add to DOM the HTML tags image after image
-        elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
-            'style="background-image: url(' + imgIdToUrl(image.id) + ');" ' +
-            'onclick="memeEditor(\'' + image.id + '\')">' +
-            '<div class="hexTop"></div><div class="hexBottom"></div></div>';
-    });
+//---------------------Meme Editor
+function memeEditor(imgId) {
+
+
+    // Once you click on an image, an object is created with Id and array of labels that has all the text features
+    gMeme = {imgId: imgId, labels: [{txt: 'text', color: '#456', shadow: '#456',size: '60px'},{txt: 'text', color: '#456',shadow: '#456',size: '10px'}]};
+    // When opens the editor - intiate the canvas with the imageId that was clicked
+    var imgSrc = imgIdToUrl(imgId);
+    initCanvas(imgSrc);
+
+    // Hide gallery
+    gAllElements.elSearchMemes.style.display = 'none';
+    gAllElements.elMemesGallery.style.display = 'none';
+    // Show editor
+    gAllElements.elGalleryEditor.style.display = 'block';
+    
+    if (gPrevSearchKeyword) {
+        updateKeywordsObj(gPrevSearchKeyword);
+    }
 }
 
-///////// *** Init the canvas when image in gallery was clicked or recieved url from user in input
-function initCanvas(imgSrc) {
-    var elMemeCanvas = document.querySelector('#memeCanvas');
-    var ctx = elMemeCanvas.getContext('2d');
+//---------------------Meme Editor Back button
+function backToGallery() {
+    // Show gallery
+    gAllElements.elSearchMemes.style.display = 'flex';
+    gAllElements.elMemesGallery.style.display = 'flex';
+    // Hide editor
+    gAllElements.elGalleryEditor.style.display = 'none';
+}
 
+//------------------------------Canvas-----------------------------------------//
+
+//---------------------Init canvas
+function initCanvas(imgSrc) {
+    
     var img = new Image();
     img.src = imgSrc;
 
     // Draw on canvas after the image is loaded from server or from url
     img.onload = function () {
-        elMemeCanvas.width = this.naturalWidth;
-        elMemeCanvas.height = this.naturalHeight;
-        drawOnCanvas(ctx, img);
+        gElMemeCanvas.width = this.naturalWidth;
+        gElMemeCanvas.height = this.naturalHeight;
+        drawOnCanvas(gCtx, img);
     };
 }
 
-///////// *** Draw on canvas the received image
+//---------------------Draw on canvas the received image
 function drawOnCanvas(ctx, img) {
-    ctx.drawImage(img, 0, 0);
+    ctx.drawImage(img, 0, 0, 500,300);
     ctx.font = "60px 'Segoe UI'";
-    ctx.fillText("print on Canvas", 50, 300);
+    ctx.fillText("print on Canvas", 60, 105);
 }
 
-///////// *** Save the contact information from the DOM
+//---------------------Edit Meme Change label
+function changeLabel(elLabel) {
+    gMeme.labels[0].txt = elLabel.value;
+    drawCanvas();
+}
+
+//---------------------Init the canvas when image in gallery was clicked or recieved url from user in input
+function drawCanvas() {
+
+    var img = new Image();
+    img.src = imgIdToUrl(gMeme.imgId);
+
+    // Draw on canvas after the image is loaded from server or from url
+    img.onload = function () {
+        gElMemeCanvas.width = this.naturalWidth;
+        gElMemeCanvas.height = this.naturalHeight;
+        gCtx.drawImage(img, 60, 105, 500, 300);
+        gCtx.font = '"'+gMeme.labels[0].size + " Segoe UI ";
+        console.log(' gCtx.font ', gCtx.font );
+        gCtx.fillText(gMeme.labels[0].txt, 60, 105);
+    };
+}
+
+//------------------------------End of Canvas-----------------------------------------//
+
+//---------------------Save the contact information from the DOM
 function saveContact() {
 
     var elName = document.querySelector('#name');
@@ -149,7 +191,7 @@ function saveContact() {
     localStorage['users'] = usersAsStr;
 }
 
-///////// *** Update the gallery by the keyword typed
+//---------------------Update the gallery by the keyword typed
 function updateGallery(keyword) {
     var currSearchEndIndex = gImages.length - 1;
 
@@ -179,84 +221,62 @@ function updateGallery(keyword) {
     renderImages(matchingImages);
 }
 
-///////// *** Clear the gallery
+//---------------------Clear the gallery
 function clearGallery() {
     gAllElements.elMemesGallery.innerHTML = '';
 }
 
-
-// TODO
-// function downloadImg(elLink) {
-//     elLink.href = canvas.toDataURL();
-//     elLink.download = 'perfectMeme.jpg';
-// }
-
+function saveImg(elLink) {
+    elLink.href = canvas.toDataURL();
+    elLink.download = 'perfectMeme.jpg';
+}
 
 gImages = [
     {
-        id: 'img1',
+        id: '1',
         url: "",
         keywords: ['lord', 'rings', 'mordor', 'boromir',
             'lord of the rings', 'one does not simply']
     },
+
+    // {
+    //     id: '2',
+    //     url: "",
+    //     keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
+    // },
+
     {
-        id: 'img2',
-        url: "",
-        keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
-    },
-    {
-        id: 'img3',
+        id: '3',
         url: "",
         keywords: ['fry', 'futurama', 'shut up and take my money']
     },
     {
-        id: 'img4',
+        id: '4',
         url: "",
         keywords: ['sweet brown', "ain't", "ain't nobody got time for that"]
     },
     // {
-    //     id: 'img5',
+    //     id: '5',
     //     url: "",
     //     keywords: ['cat', 'singing', 'funny', 'animals', 'aww']
     // },
     // {
-    //     id: 'img6',
+    //     id: '6',
     //     url: "",
     //     keywords: ['animals', 'dog', 'surprised', 'shocked']
     // },
     // {
-    //     id: 'img7',
+    //     id: '7',
     //     url: "",
     //     keywords: ['star', 'wars', 'star wars', 'chewbacca',
     //         'princess leia', 'kissing', 'love']
     // },
     {
-        id: 'img8',
+        id: '8',
         url: "",
         keywords: ['animals', 'panda', 'kong fu',
             'kong-fu', 'excited', 'aww', 'happy']
     }
 ];
-
-// gCloudSettings = {
-//     "size": {
-//         "grid": 8,
-//         "factor": 20,
-//         "normalize": true
-//     },
-//     "color": {
-//         "background": "rgba(255,255,255,0)",
-//         "start": "#323232", // color of the smallest font, if options.color = "gradient""
-//         "end": "#00ffbf" // color of the largest font, if options.color = "gradient"
-//     },
-//     "options": {
-//         "color": "gradient",
-//         "rotationRatio": 0.3, // 0 is all horizontal, 1 is all vertical
-//         "printMultiplier": 3,
-//         "sort": "random"
-//     },
-//     "font": "LatoRegular", //  the CSS font-family string
-//     "shape": "square" // circle, square, star or a theta function describing a shape
-// };
 
 
