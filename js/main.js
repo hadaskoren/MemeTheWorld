@@ -4,6 +4,9 @@
 var gAllElements = {};
 // GLOBAL MODEL
 var gImages = [];
+//GLOBAL vars
+var gPrevSearchKeyword;
+var gPrevSearchEndIndex;
 
 ///////// *** Initiates the meme generator on window load
 function initApp() {
@@ -14,7 +17,7 @@ function initApp() {
     gAllElements.elMemesGallery = document.querySelector('.memes-gallery');
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
 
-    createImages();
+    renderImages(gImages);
 } // *** End of initApp
 
 ///////// *** Opens the meme editor
@@ -26,7 +29,6 @@ function memeEditor(imgId) {
     gAllElements.elGalleryEditor.style.display = 'block';
     // When opens the editor - intiate the canvas with the imageId that was clicked
     var imgSrc = imgIdToUrl(imgId);
-    console.log('imgSrc', imgSrc);
     initCanvas(imgSrc);
 } // *** End of memeEditor
 
@@ -42,7 +44,7 @@ function backToGallery() {
 ///////// *** Renders images into DOM from array of images objects
 function renderImages(images) {
     var elMemesGallery = document.querySelector('.memes-gallery');
-    images.forEach(function(image){
+    images.forEach(function (image) {
         // Ask Yaron about URL
         // if(image.url !== "") {
         //     url = image.url;
@@ -60,42 +62,123 @@ function renderImages(images) {
 function initCanvas(imgSrc) {
     var elMemeCanvas = document.querySelector('#memeCanvas');
     var ctx = elMemeCanvas.getContext('2d');
-    
+
     var img = new Image();
     img.src = imgSrc;
 
     // Draw on canvas after the image is loaded from server or from url
     img.onload = function () {
         drawOnCanvas(ctx, img);
-    };  
+    };
 }  // *** End of initCanvas
 
 ///////// *** Draw on canvas the received image
 function drawOnCanvas(ctx, img) {
 
-        ctx.drawImage(img, 0, 0, 500, 500);
-        ctx.font = "60px 'Segoe UI'";
-        ctx.fillText("print on Canvas", 50, 300);
+    ctx.drawImage(img, 0, 0, 500, 500);
+    ctx.font = "60px 'Segoe UI'";
+    ctx.fillText("print on Canvas", 50, 300);
 }  // *** End of drawOnCanvas
 
 ///////// *** Save the contact information from the DOM
 function saveContact() {
-    
+
     var elName = document.querySelector('#name');
     var elEmail = document.querySelector('#email');
     var elSubject = document.querySelector('#subject');
     var elMsg = document.querySelector('#msg');
     var users = JSON.parse(localStorage.getItem('users'));
-    users.push({userName: elName.value, userEmail: elEmail.value, emailSubject: elSubject.value, emailMessage: elMsg.value});
+    users.push({ userName: elName.value, userEmail: elEmail.value, emailSubject: elSubject.value, emailMessage: elMsg.value });
     var usersAsStr = JSON.stringify(users);
     localStorage['users'] = usersAsStr;
 }
 
-///////// *** Create the images' global model
-function createImages() {
-    for (var i = 0; i < 8; i++) {
-        gImages.push({id: 'img'+(i+1), url:"", keywords: []});
+///////// *** Update the gallery by the keyword typed
+function updateGallery(keyword) { 
+    // 
+    var currSearchEndIndex = gImages.length - 1;
+
+    // Clear the gallery every new update
+    clearGallery();
+    // if new search is the same as last search + one character ->
+    //      end the curent search where to last image was found in the last search
+    if (gPrevSearchKeyword && (keyword.slice(0,-1) === gPrevSearchKeyword)) {
+        currSearchEndIndex = gPrevSearchEndIndex;
     }
-    // Renders the images created
-    renderImages(gImages);
-} // *** End of renderImages
+
+    gPrevSearchKeyword = keyword;
+    var matchingImages = [];
+
+    // Iterate through gImages.keywords and find images with matching keyword
+    for (var i = 0; i <= currSearchEndIndex; i++) {
+        // Make current image.keywords into a string
+        var keywordsAsStr = gImages[i].keywords.join('');
+        // Check if the search keyword is inside the new image.keywords string 
+        if (keywordsAsStr.indexOf(keyword) !== -1) {
+            matchingImages.push(gImages[i]);
+            gPrevSearchEndIndex = i;
+        }
+    }
+    // Render the gallery with the matching images
+    renderImages(matchingImages);
+}  // *** End of updateGallery
+
+///////// *** Clear the gallery
+function clearGallery() {
+    gAllElements.elMemesGallery.innerHTML = '';
+}  // *** End of updateGallery
+
+
+// TODO
+// function downloadImg(elLink) {
+//     elLink.href = canvas.toDataURL();
+//     elLink.download = 'perfectMeme.jpg';
+// }
+
+
+gImages = [
+    {
+        id: 'img1',
+        url: "",
+        keywords: ['lord', 'rings', 'mordor', 'boromir',
+            'lord of the rings', 'one does not simply']
+    },
+    {
+        id: 'img2',
+        url: "",
+        keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
+    },
+    {
+        id: 'img3',
+        url: "",
+        keywords: ['fry', 'futurama', 'shut up and take my money']
+    },
+    {
+        id: 'img4',
+        url: "",
+        keywords: ['sweet brown', "ain't", "ain't nobody got time for that"]
+    },
+    {
+        id: 'img5',
+        url: "",
+        keywords: ['cat', 'singing', 'funny', 'animals', 'aww']
+    },
+    {
+        id: 'img6',
+        url: "",
+        keywords: ['animals', 'dog', 'surprised', 'shocked']
+    },
+    {
+        id: 'img7',
+        url: "",
+        keywords: ['star', 'wars', 'star wars', 'chewbacca',
+            'princess leia', 'kissing', 'love']
+    },
+    {
+        id: 'img8',
+        url: "",
+        keywords: ['animals', 'panda', 'kong fu',
+            'kong-fu', 'excited', 'aww', 'happy']
+    }
+];
+
