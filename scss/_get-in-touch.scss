@@ -1,6 +1,39 @@
-.hr {
-    margin: 0 auto;
-    width: 95%;
-    height: 1px;
-    background-color: #2b2b2b;
+
+
+.get-in-touch-headline {
+    display: block;
+    font-family: var(--secondary-font);
+    margin-bottom: 2%;
+}
+
+.get-in-touch-headline label {
+    font-size: rem(18px);
+    color: var(--gray-font-secondary-color);
+}
+
+.get-in-touch-headline h2 {
+    font-size: rem(30px);
+    color: var(--gray-font-primary-color);
+}
+
+.get-in-touch .inner-container {
+    border: none;
+}
+
+.get-in-touch-details-extra {
+    width: 180px;
+    height: 117px;
+    font-family: LatoBlack;
+    color: var(--gray-font-secondary-color);
+}
+
+.get-in-touch-details-contact {
+    width: 121px;
+    height: 54px;
+    color: var(--gray-font-secondary-color);
+}
+
+.get-in-touch-details {
+    width: 367px;
+    height: 211px;
 }

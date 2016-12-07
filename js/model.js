@@ -3,7 +3,7 @@
 var gImages = [];
 
 function createImages() {
-    for (var i = 0; i < 4; i++) {
+    for (var i = 0; i < 6; i++) {
         gImages.push({id: 'img'+(i+1), url:"", keywords: []});
     }
     console.log('renderImages',gImages);

@@ -20,7 +20,7 @@ function memeEditor() {
 }
 
 function backToGallery() {
-    gElements.elSearchMemes.style.display = 'block';
-    gElements.elMemesGallery.style.display = 'block';
+    gElements.elSearchMemes.style.display = 'flex';
+    gElements.elMemesGallery.style.display = 'flex';
     gElements.elGalleryEditor.style.display = 'none';
 }

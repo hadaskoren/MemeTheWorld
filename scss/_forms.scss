@@ -15,3 +15,35 @@
 .form-group {
   margin: 1em 0;
 }
+
+.get-in-touch-form {
+  width: 580px;
+  
+}
+
+.get-in-touch-form input,textarea {
+  padding: 12px;
+  background-color: #454545;
+  border: none;
+  margin-bottom:3%;
+  color: var(--gray-font-secondary-color);
+}
+
+.get-in-touch-form textarea {
+  height: 148px;
+}
+
+.submit-form{
+  background-color: var(--font-secondary-color);
+  border: none;
+  font-size: rem(12px);
+  font-family: var(--primary-font);
+  padding: 11px 30px;
+  color: var(--font-primary-color);
+  margin-top: 1%;
+  margin-bottom: em(50px);
+}
+
+.submit-contact{
+  width: 580px;
+}
