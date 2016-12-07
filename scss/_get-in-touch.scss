@@ -23,17 +23,23 @@
 .get-in-touch-details-extra {
     width: 180px;
     height: 117px;
-    font-family: LatoBlack;
+    font-family: LatoBlack, LatoRegular;
     color: var(--gray-font-secondary-color);
 }
 
 .get-in-touch-details-contact {
-    width: 121px;
+    width: 183px;
     height: 54px;
     color: var(--gray-font-secondary-color);
+    margin-top: 34%;
+    margin-left: -2%;
+    font-family: LatoBold;
 }
 
 .get-in-touch-details {
     width: 367px;
     height: 211px;
+    margin-left: 2%;
+    margin-top: 15%;
+    font-size: rem(12px);
 }
