@@ -7,6 +7,9 @@ var gImages = [];
 // GLOBAL toggleKeywords
 var gIsKeywordsPanelOpen = false;
 
+var gSearchedKeywordsObj = {};
+
+
 ///////// *** Initiates the meme generator on window load
 function initApp() {
     var contactUsers = [];
@@ -109,5 +112,13 @@ function togglePopularKeywords() {
         elKeywordsPanel.style.display = 'none';
     } else {
         elKeywordsPanel.style.display = 'block';
+    }
+}
+
+function updateKeywordsObj(searchedWord) {
+    if(gSearchedKeywordsObj[searchedword] !== null) {
+        gSearchedKeywordsObj[searchedword] += 1;
+    } else {
+        gSearchedKeywordsObj[searchedword] = 1;
     }
 }
