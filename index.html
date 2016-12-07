@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
 </head>
 
-<body class="container" onload="loaded()">
+<body class="container" onload="initApp()">
     <nav class="nav-bar">
         <!--<img class="pointy-thingy" src="assets/img/pointy-thingy.png">-->
         <ul class="flex align-center justify-center space-between clean-list nav-bar-items">
@@ -35,6 +35,7 @@
             <div class="memes-gallery flex flex-wrap space-between">
             </div>
             <section class="gallery-editor">
+                <canvas width="500" height="500" id="memeCanvas" style="border:1px solid blue;">Sorry, no canvas available</canvas>    
                 <button class="back-to-gallery btn btn-link" onclick="backToGallery()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back to list</button>
             </section>
         </div>
@@ -175,6 +176,7 @@
         copyrights 2016 by Hadas&amp;Omer.ltd
     </footer>
 
+    <script src="js/utils.js"></script>
     <script src="js/main.js"></script>
     <script src="js/model.js"></script>
     <script src="js/dom.js"></script>
