@@ -11,10 +11,10 @@ var gPrevSearchEndIndex;
 
 // GLOBALS for popular keywords
 var gIsKeywordsPanelOpen = true;
-var gSearchedKeywordsObj = {};
+var gPopularKeywordsObj = {};
 var gCloudSettings;
 
-var testKeywords = { aasdfasd: 2, basdfasd: 2, ccxbxb: 4, ddfdfg: 4, eertyerty: 6, ffhfjh: 6, gghjkhjk: 7, hhjklk: 9, iyuiouyio: 9, jkljjkljo: 15 };
+gPopularKeywordsObj = { baby: 2, human: 2, dog: 4, 'sweet brown': 4, futurama: 6, fry: 6, panda: 7, animal: 9, mordor: 9, 'nobody got time': 15 };
 
 
 // GLOBAL meme
@@ -57,13 +57,13 @@ function renderImages(images) {
 
 
 //---------------------Update an object with the keywords that were searched
-function updateKeywordsObj(searchedWord) {
-    if (!gSearchedKeywordsObj[searchedWord]) {
-        gSearchedKeywordsObj[searchedWord] = 1;
+function updateKeywordsObj(keyword) {
+    if (!gPopularKeywordsObj[keyword]) {
+        gPopularKeywordsObj[keyword] = 1;
     } else {
-        gSearchedKeywordsObj[searchedWord] += 1;
+        gPopularKeywordsObj[keyword]++;
     }
-    console.log('gSearchedKeywordsObj', gSearchedKeywordsObj);
+    console.log('gSearchedKeywordsObj', gPopularKeywordsObj);
 }
 
 //---------------------Popular Keywords panel Open and close
@@ -85,19 +85,25 @@ function togglePopularKeywords() {
 function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
     elKeyWords.innerHTML = '';
-    for (var keyword in testKeywords) {
-        elKeyWords.innerHTML += '<a href="#" rel="' + testKeywords[keyword] + '" >&nbsp;' + keyword + '&nbsp; </a>';
+    for (var keyword in gPopularKeywordsObj) {
+        elKeyWords.innerHTML += '<span onclick="searchByKeyword(this.innerText)" rel="' +
+            gPopularKeywordsObj[keyword] + '" class="flex justify-center flex-wrap align-center">' +
+            keyword + '</span>';
     }
-        for (var i = elKeyWords.children.length; i >= 0; i--) {
+    for (var i = elKeyWords.children.length; i >= 0; i--) {
         var randIndex = Math.random() * i | 0;
         elKeyWords.appendChild(elKeyWords.children[randIndex]);
     }
-    // console.log('elKeyWords', elKeyWords);
-    $(".keywords-cloud a").tagcloud({
-        size: { start: 24, end: 50, unit: "px" },
+
+    $(".keywords-cloud span").tagcloud({
+        size: { start: 15, end: 40, unit: "px" },
         color: { start: '#323232', end: '#00ffbf' }
     });
-    // $('.keywords-cloud').awesomeCloud(gCloudSettings);
+}
+
+function searchByKeyword(keyword) {
+    gAllElements.elSearchMemes.querySelector('.search-by-keyword').value = keyword;
+    updateGallery(keyword);
 }
 
 //---------------------Meme Editor
@@ -105,7 +111,7 @@ function memeEditor(imgId) {
 
 
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
-    gMeme = {imgId: imgId, labels: [{txt: 'text', color: '#456', shadow: '#456',size: '60px'},{txt: 'text', color: '#456',shadow: '#456',size: '10px'}]};
+    gMeme = { imgId: imgId, labels: [{ txt: 'text', color: '#456', shadow: '#456', size: '60px' }, { txt: 'text', color: '#456', shadow: '#456', size: '10px' }] };
     // When opens the editor - intiate the canvas with the imageId that was clicked
     var imgSrc = imgIdToUrl(imgId);
     initCanvas(imgSrc);
@@ -115,7 +121,7 @@ function memeEditor(imgId) {
     gAllElements.elMemesGallery.style.display = 'none';
     // Show editor
     gAllElements.elGalleryEditor.style.display = 'block';
-    
+
     if (gPrevSearchKeyword) {
         updateKeywordsObj(gPrevSearchKeyword);
     }
@@ -134,7 +140,7 @@ function backToGallery() {
 
 //---------------------Init canvas
 function initCanvas(imgSrc) {
-    
+
     var img = new Image();
     img.src = imgSrc;
 
@@ -148,7 +154,7 @@ function initCanvas(imgSrc) {
 
 //---------------------Draw on canvas the received image
 function drawOnCanvas(ctx, img) {
-    ctx.drawImage(img, 0, 0, 500,300);
+    ctx.drawImage(img, 0, 0, 500, 300);
     ctx.font = "60px 'Segoe UI'";
     ctx.fillText("print on Canvas", 60, 105);
 }
@@ -170,8 +176,8 @@ function drawCanvas() {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 60, 105, 500, 300);
-        gCtx.font = '"'+gMeme.labels[0].size + " Segoe UI ";
-        console.log(' gCtx.font ', gCtx.font );
+        gCtx.font = '"' + gMeme.labels[0].size + " Segoe UI ";
+        console.log(' gCtx.font ', gCtx.font);
         gCtx.fillText(gMeme.labels[0].txt, 60, 105);
     };
 }
@@ -235,16 +241,14 @@ gImages = [
     {
         id: '1',
         url: "",
-        keywords: ['lord', 'rings', 'mordor', 'boromir',
+        keywords: ['lord', 'rings', 'mordor', 'boromir','human',
             'lord of the rings', 'one does not simply']
     },
-
-    // {
-    //     id: '2',
-    //     url: "",
-    //     keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
-    // },
-
+    {
+        id: '2',
+        url: "",
+        keywords: ['baby', 'evil', 'planning', 'laughing', 'human']
+    },
     {
         id: '3',
         url: "",
@@ -253,30 +257,30 @@ gImages = [
     {
         id: '4',
         url: "",
-        keywords: ['sweet brown', "ain't", "ain't nobody got time for that"]
+        keywords: ['sweet brown', 'nobody got time for that', 'humans']
     },
-    // {
-    //     id: '5',
-    //     url: "",
-    //     keywords: ['cat', 'singing', 'funny', 'animals', 'aww']
-    // },
-    // {
-    //     id: '6',
-    //     url: "",
-    //     keywords: ['animals', 'dog', 'surprised', 'shocked']
-    // },
+    {
+        id: '5',
+        url: "",
+        keywords: ['dog', 'grumpy', 'funny', 'animal', 'sarcastic']
+    },
+    {
+        id: '6',
+        url: "",
+        keywords: ['animal', 'panda', 'kong fu',
+            'kong-fu', 'excited', 'aww', 'happy']
+    }
     // {
     //     id: '7',
     //     url: "",
     //     keywords: ['star', 'wars', 'star wars', 'chewbacca',
     //         'princess leia', 'kissing', 'love']
     // },
-    {
-        id: '8',
-        url: "",
-        keywords: ['animals', 'panda', 'kong fu',
-            'kong-fu', 'excited', 'aww', 'happy']
-    }
+    // {
+    //     id: '8',
+    //     url: "",
+    //     keywords: ['animals', 'dog', 'surprised', 'shocked']
+    // },
 ];
 
 

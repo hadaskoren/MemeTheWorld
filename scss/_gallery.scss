@@ -22,30 +22,33 @@
 
 .popularKeywords {
   width: 350px;
-  height: 400px;
-  background-color: grey;
+  background-color: #323232;
+  opacity: 0.9;
   display: none;
   position: absolute;
   top: 136px;
   right: 71px;
-  z-index: 2;
+  z-index: 99;
   padding: em(15px);
+  box-shadow: 1px 1px 8px 4px  rgba(20, 20, 20, 0.9);
 }
-
-.popularKeywords h4 {
-  color: white;
-}
-
-.popularKeywords .keywords-cloud{
-  color: #90cbf6;
-  font-size: rem(20px);
-}
-
 
 .keywords-cloud {
   width: 100%;
   height: 100%;
   background-color: white;
+  display: flex;
+  box-shadow: 1px 1px 8px 4px  rgba(20, 20, 20, 0.9);
+  padding: 3px;
+
+  span {
+    margin: 2px;
+    padding: 5px;
+    text-align: center;
+    cursor: pointer;
+    border: 1px solid #323232;
+    border-radius: 50%;
+  }
 }
 
 .memeCanvas {
