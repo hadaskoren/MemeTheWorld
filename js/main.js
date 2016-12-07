@@ -9,11 +9,13 @@ var gImages = [];
 var gPrevSearchKeyword;
 var gPrevSearchEndIndex;
 
-// GLOBAL toggleKeywords
+// GLOBALS for popular keywords
 var gIsKeywordsPanelOpen = true;
-
-// GLOBAL var that saves a counter of the keywords that were searched
 var gSearchedKeywordsObj = {};
+var gCloudSettings;
+
+var testKeywords = { aasdfasd: 2, basdfasd: 2, ccxbxb: 4, ddfdfg: 4, eertyerty: 6, ffhfjh: 6, gghjkhjk: 7, hhjklk: 9, iyuiouyio: 9, jkljjkljo: 15 };
+
 
 
 ///////// *** Initiates the meme generator on window load
@@ -52,22 +54,48 @@ function backToGallery() {
     gAllElements.elGalleryEditor.style.display = 'none';
 }
 
-///////// *** Renders images into DOM from array of images objects
+///////// *** Update an object with the keywords that were searched
+function updateKeywordsObj(searchedWord) {
+    if (!gSearchedKeywordsObj[searchedWord]) {
+        gSearchedKeywordsObj[searchedWord] = 1;
+    } else {
+        gSearchedKeywordsObj[searchedWord] += 1;
+    }
+    console.log('gSearchedKeywordsObj', gSearchedKeywordsObj);
+}
+
+///////// *** Opens popular keywords modal
+// Renders tag cloud into DOM from object of keywords
 function togglePopularKeywords() {
     gIsKeywordsPanelOpen = !gIsKeywordsPanelOpen;
     var elKeywordsPanel = document.querySelector('.popularKeywords');
-    var elKeyWords = document.querySelector('.keyWords');
-    elKeyWords = "";
+
     if (gIsKeywordsPanelOpen) {
         elKeywordsPanel.style.display = 'none';
     } else {
+
         elKeywordsPanel.style.display = 'block';
-        for (var keyword in gSearchedKeywordsObj) {
-            elKeyWords.innerHTML += keyword + " ";
-        }
+        renderPopularKeywords();
     }
 }
 
+function renderPopularKeywords() {
+    var elKeyWords = document.querySelector('.keywords-cloud');
+    elKeyWords.innerHTML = '';
+    for (var keyword in testKeywords) {
+        elKeyWords.innerHTML += '<a href="#" rel="' + testKeywords[keyword] + '" >&nbsp;' + keyword + '&nbsp; </a>';
+    }
+        for (var i = elKeyWords.children.length; i >= 0; i--) {
+        var randIndex = Math.random() * i | 0;
+        elKeyWords.appendChild(elKeyWords.children[randIndex]);
+    }
+    // console.log('elKeyWords', elKeyWords);
+    $(".keywords-cloud a").tagcloud({
+        size: { start: 24, end: 50, unit: "px" },
+        color: { start: '#323232', end: '#00ffbf' }
+    });
+    // $('.keywords-cloud').awesomeCloud(gCloudSettings);
+}
 ///////// *** Renders images into DOM from array of images objects
 function renderImages(images) {
     var elMemesGallery = document.querySelector('.memes-gallery');
@@ -163,15 +191,6 @@ function clearGallery() {
 //     elLink.download = 'perfectMeme.jpg';
 // }
 
-///////// *** Update an object with the keywords that were searched
-function updateKeywordsObj(searchedWord) {
-    if (gSearchedKeywordsObj[searchedWord]) {
-        gSearchedKeywordsObj[searchedWord] += 1;
-    } else {
-        gSearchedKeywordsObj[searchedWord] = 1;
-    }
-    console.log('gSearchedKeywordsObj', gSearchedKeywordsObj);
-}
 
 gImages = [
     {
@@ -180,11 +199,11 @@ gImages = [
         keywords: ['lord', 'rings', 'mordor', 'boromir',
             'lord of the rings', 'one does not simply']
     },
-    // {
-    //     id: 'img2',
-    //     url: "",
-    //     keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
-    // },
+    {
+        id: 'img2',
+        url: "",
+        keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
+    },
     {
         id: 'img3',
         url: "",
@@ -218,4 +237,26 @@ gImages = [
             'kong-fu', 'excited', 'aww', 'happy']
     }
 ];
+
+// gCloudSettings = {
+//     "size": {
+//         "grid": 8,
+//         "factor": 20,
+//         "normalize": true
+//     },
+//     "color": {
+//         "background": "rgba(255,255,255,0)",
+//         "start": "#323232", // color of the smallest font, if options.color = "gradient""
+//         "end": "#00ffbf" // color of the largest font, if options.color = "gradient"
+//     },
+//     "options": {
+//         "color": "gradient",
+//         "rotationRatio": 0.3, // 0 is all horizontal, 1 is all vertical
+//         "printMultiplier": 3,
+//         "sort": "random"
+//     },
+//     "font": "LatoRegular", //  the CSS font-family string
+//     "shape": "square" // circle, square, star or a theta function describing a shape
+// };
+
 

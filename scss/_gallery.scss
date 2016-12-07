@@ -36,7 +36,13 @@
   color: white;
 }
 
-.popularKeywords .keyWords{
+.popularKeywords .keywords-cloud{
   color: #90cbf6;
   font-size: rem(20px);
+}
+
+.keywords-cloud {
+  width: 100%;
+  height: 100%;
+  background-color: white;
 }
