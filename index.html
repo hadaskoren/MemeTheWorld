@@ -29,7 +29,7 @@
         <div class="inner-container">
             <h1>Create Your Meme:</h1>
             <div class="search-memes flex space-between">
-                <input type="text" class="search-by-keyword" placeholder="Search">
+                <input type="text" class="search-by-keyword" oninput="updateGallery(this.value)" placeholder="Enter a keyword">
                 <button class="btn btn-primary toggle-popular-keywords" onclick="togglePopularKeywords()">Popular Keywords</button>
             </div>
             <div class="memes-gallery flex flex-wrap space-between">
@@ -37,6 +37,7 @@
             <section class="gallery-editor">
                 <canvas width="500" height="500" id="memeCanvas" style="border:1px solid blue;">Sorry, no canvas available</canvas>    
                 <button class="back-to-gallery btn btn-link" onclick="backToGallery()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back to list</button>
+                <button class="download-image" onclick="downloadImg()">Download your meme</button>
             </section>
             <section class="popularKeywords">
                 <h4> Popular Keywords:</h4>
