@@ -5,13 +5,14 @@ var gAllElements = {};
 // GLOBAL MODEL
 var gImages = [];
 
-//GLOBAL vars
+// GLOBAL vars
 var gPrevSearchKeyword;
 var gPrevSearchEndIndex;
 
 // GLOBAL toggleKeywords
-var gIsKeywordsPanelOpen = false;
+var gIsKeywordsPanelOpen = true;
 
+// GLOBAL var that saves a counter of the keywords that were searched
 var gSearchedKeywordsObj = {};
 
 
@@ -25,7 +26,7 @@ function initApp() {
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
 
     renderImages(gImages);
-} // *** End of initApp
+}
 
 ///////// *** Opens the meme editor
 function memeEditor(imgId) {
@@ -37,7 +38,10 @@ function memeEditor(imgId) {
     // When opens the editor - intiate the canvas with the imageId that was clicked
     var imgSrc = imgIdToUrl(imgId);
     initCanvas(imgSrc);
-} // *** End of memeEditor
+    if (gPrevSearchKeyword) {
+        updateKeywordsObj(gPrevSearchKeyword);
+    }
+}
 
 ///////// *** Initiates the meme generator
 function backToGallery() {
@@ -46,15 +50,21 @@ function backToGallery() {
     gAllElements.elMemesGallery.style.display = 'flex';
     // Hide editor
     gAllElements.elGalleryEditor.style.display = 'none';
-} // *** End of backToGallery
+}
 
+///////// *** Renders images into DOM from array of images objects
 function togglePopularKeywords() {
     gIsKeywordsPanelOpen = !gIsKeywordsPanelOpen;
     var elKeywordsPanel = document.querySelector('.popularKeywords');
+    var elKeyWords = document.querySelector('.keyWords');
+    elKeyWords = "";
     if (gIsKeywordsPanelOpen) {
         elKeywordsPanel.style.display = 'none';
     } else {
         elKeywordsPanel.style.display = 'block';
+        for (var keyword in gSearchedKeywordsObj) {
+            elKeyWords.innerHTML += keyword + " ";
+        }
     }
 }
 
@@ -73,7 +83,7 @@ function renderImages(images) {
             'onclick="memeEditor(\'' + image.id + '\')">' +
             '<div class="hexTop"></div><div class="hexBottom"></div></div>';
     });
-} // *** End of renderImages
+}
 
 ///////// *** Init the canvas when image in gallery was clicked or recieved url from user in input
 function initCanvas(imgSrc) {
@@ -89,14 +99,14 @@ function initCanvas(imgSrc) {
         elMemeCanvas.height = this.naturalHeight;
         drawOnCanvas(ctx, img);
     };
-}  // *** End of initCanvas
+}
 
 ///////// *** Draw on canvas the received image
 function drawOnCanvas(ctx, img) {
     ctx.drawImage(img, 0, 0);
     ctx.font = "60px 'Segoe UI'";
     ctx.fillText("print on Canvas", 50, 300);
-}  // *** End of drawOnCanvas
+}
 
 ///////// *** Save the contact information from the DOM
 function saveContact() {
@@ -112,15 +122,14 @@ function saveContact() {
 }
 
 ///////// *** Update the gallery by the keyword typed
-function updateGallery(keyword) { 
-    // 
+function updateGallery(keyword) {
     var currSearchEndIndex = gImages.length - 1;
 
     // Clear the gallery every new update
     clearGallery();
     // if new search is the same as last search + one character ->
     //      end the curent search where to last image was found in the last search
-    if (gPrevSearchKeyword && (keyword.slice(0,-1) === gPrevSearchKeyword)) {
+    if (gPrevSearchKeyword && (keyword.slice(0, -1) === gPrevSearchKeyword)) {
         currSearchEndIndex = gPrevSearchEndIndex;
     }
 
@@ -140,13 +149,12 @@ function updateGallery(keyword) {
     }
     // Render the gallery with the matching images
     renderImages(matchingImages);
-  // *** End of updateGallery
 }
 
 ///////// *** Clear the gallery
 function clearGallery() {
     gAllElements.elMemesGallery.innerHTML = '';
-}  // *** End of updateGallery
+}
 
 
 // TODO
@@ -155,12 +163,14 @@ function clearGallery() {
 //     elLink.download = 'perfectMeme.jpg';
 // }
 
+///////// *** Update an object with the keywords that were searched
 function updateKeywordsObj(searchedWord) {
-    if(gSearchedKeywordsObj[searchedword] !== null) {
-        gSearchedKeywordsObj[searchedword] += 1;
+    if (gSearchedKeywordsObj[searchedWord]) {
+        gSearchedKeywordsObj[searchedWord] += 1;
     } else {
-        gSearchedKeywordsObj[searchedword] = 1;
+        gSearchedKeywordsObj[searchedWord] = 1;
     }
+    console.log('gSearchedKeywordsObj', gSearchedKeywordsObj);
 }
 
 gImages = [
