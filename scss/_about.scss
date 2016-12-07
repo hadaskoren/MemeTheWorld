@@ -61,34 +61,55 @@
 }
 
 .developer-info-socials {
-    // width: 200px;
+    align-self: flex-end;
+
     li {
-        // font-size: em(25px);
         text-align: center;
         width: 25px;
         height: 24px;
         padding: 6px;   
     }
-    // background-color:
-
-    align-self: flex-end;
 
       .facebook {
+        background-color: lighten(#3B5998, 20%);
+          &:hover {
         background-color: #3B5998;
+              
+          }
     }
       .twitter {
+        background-color: lighten(#00aced, 20%);
+                    &:hover {
         background-color: #00aced;
+              
+          }
     }
       .google {
+        background-color: lighten(#dd4b39, 20%);
+                    &:hover {
         background-color: #dd4b39;
+              
+          }
     }
       .pinterest {
+        background-color: lighten(#cb2027, 20%);
+                    &:hover {
         background-color: #cb2027;
+              
+          }
     }
       .linkedin {
+        background-color: lighten(#007bb5, 20%);
+                    &:hover {
         background-color: #007bb5;
+              
+          }
     }
       .dribble {
+        background-color: lighten(#ea4c89, 20%);
+                    &:hover {
         background-color: #ea4c89;
+              
+          }
     }
 }

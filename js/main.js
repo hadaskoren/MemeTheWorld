@@ -85,14 +85,15 @@ function initCanvas(imgSrc) {
 
     // Draw on canvas after the image is loaded from server or from url
     img.onload = function () {
+        elMemeCanvas.width = this.naturalWidth;
+        elMemeCanvas.height = this.naturalHeight;
         drawOnCanvas(ctx, img);
     };
 }  // *** End of initCanvas
 
 ///////// *** Draw on canvas the received image
 function drawOnCanvas(ctx, img) {
-
-    ctx.drawImage(img, 0, 0, 500, 500);
+    ctx.drawImage(img, 0, 0);
     ctx.font = "60px 'Segoe UI'";
     ctx.fillText("print on Canvas", 50, 300);
 }  // *** End of drawOnCanvas
@@ -169,11 +170,11 @@ gImages = [
         keywords: ['lord', 'rings', 'mordor', 'boromir',
             'lord of the rings', 'one does not simply']
     },
-    {
-        id: 'img2',
-        url: "",
-        keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
-    },
+    // {
+    //     id: 'img2',
+    //     url: "",
+    //     keywords: ['toy', 'story', 'buzz', 'toy story', 'lightyears', 'everywhere']
+    // },
     {
         id: 'img3',
         url: "",
@@ -184,22 +185,22 @@ gImages = [
         url: "",
         keywords: ['sweet brown', "ain't", "ain't nobody got time for that"]
     },
-    {
-        id: 'img5',
-        url: "",
-        keywords: ['cat', 'singing', 'funny', 'animals', 'aww']
-    },
-    {
-        id: 'img6',
-        url: "",
-        keywords: ['animals', 'dog', 'surprised', 'shocked']
-    },
-    {
-        id: 'img7',
-        url: "",
-        keywords: ['star', 'wars', 'star wars', 'chewbacca',
-            'princess leia', 'kissing', 'love']
-    },
+    // {
+    //     id: 'img5',
+    //     url: "",
+    //     keywords: ['cat', 'singing', 'funny', 'animals', 'aww']
+    // },
+    // {
+    //     id: 'img6',
+    //     url: "",
+    //     keywords: ['animals', 'dog', 'surprised', 'shocked']
+    // },
+    // {
+    //     id: 'img7',
+    //     url: "",
+    //     keywords: ['star', 'wars', 'star wars', 'chewbacca',
+    //         'princess leia', 'kissing', 'love']
+    // },
     {
         id: 'img8',
         url: "",
