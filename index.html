@@ -44,21 +44,36 @@
                     </div>
                     <div class="edit-text flex flex-column">
                         <div>
-                            <input class="meme-label1" onkeyup="changeLabel(this)" type="text" placeholder="Insert top text..."></input>
-                            <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick=""></button>
+                            <input class="meme-label-top" onkeyup="changeLabel(this,'top')" type="text" placeholder="Insert top text..."></input>
+                            <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('top')"></button>
                         </div>
                         <div>
-                            <input class="meme-label2" onkeyup="changeLabel(this)" type="text" placeholder="Insert bottom text..."></input>
-                            <button class="delete-bottom-text fa fa-trash-o" aria-hidden="true" onclick=""></button>
+                            <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                            <button class="font-color" aria-hidden="true" onclick="changeFontColor()"><span class="glyphicon glyphicon-text-color" aria-hidden="true"></span></button>
+                            <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow()"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                            <button class="font-align-right" aria-hidden="true" onclick="alignFontRight()"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
+                            <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter()"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
+                            <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft()"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
                         </div>
-                        
+                        <div>
+                            <input class="meme-label-bottom" onkeyup="changeLabel(this,'bottom')" type="text" placeholder="Insert bottom text..."></input>
+                            <button class="delete-bottom-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
+                        </div>
+                        <div>
+                            <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                            <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize()"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                            <button class="font-color" aria-hidden="true" onclick="changeFontColor()"><span class="glyphicon glyphicon-text-color" aria-hidden="true"></span></button>
+                            <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow()"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                            <button class="font-align-right fa fa-align-right" aria-hidden="true" onclick="alignFontRight()"></button>
+                            <button class="font-align-center fa fa-align-center" aria-hidden="true" onclick="alignFontCenter()"></button>
+                            <button class="font-align-left fa fa-align-left" aria-hidden="true" onclick="alignFontLeft()"></button>
+                        </div>
                     </div>
                 </div>
                 <div>
                     <button class="save-image btn btn-info" onclick="saveImg()">Save</button>
                 </div>
-                   
-                
             </section>
             <section class="popularKeywords">
                 <!--<h4> Popular Keywords:</h4>-->

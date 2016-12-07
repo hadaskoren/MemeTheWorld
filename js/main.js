@@ -16,24 +16,23 @@ var gCloudSettings;
 
 var testKeywords = { aasdfasd: 2, basdfasd: 2, ccxbxb: 4, ddfdfg: 4, eertyerty: 6, ffhfjh: 6, gghjkhjk: 7, hhjklk: 9, iyuiouyio: 9, jkljjkljo: 15 };
 
-
 // GLOBAL meme
 var gMeme = null;
-
-var gElMemeCanvas = document.querySelector('.memeCanvas');
-var gCtx = gElMemeCanvas.getContext('2d');
+var gElMemeCanvas;
+var gCtx;
 
 //---------------------Initiates the meme generator on window load
 function initApp() {
     var contactUsers = [];
+   
     localStorage['users'] = JSON.stringify(contactUsers);
     // Assign global elements
     gAllElements.elSearchMemes = document.querySelector('.search-memes');
     gAllElements.elMemesGallery = document.querySelector('.memes-gallery');
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
-
-    var elMemeCanvas = document.querySelector('.memeCanvas');
-    var ctx = elMemeCanvas.getContext('2d');
+    // Canvas globals
+    gElMemeCanvas = document.querySelector('.memeCanvas');
+    gCtx = gElMemeCanvas.getContext('2d');
 
     renderImages(gImages);
 }
@@ -54,7 +53,6 @@ function renderImages(images) {
             '<div class="hexTop"></div><div class="hexBottom"></div></div>';
     });
 }
-
 
 //---------------------Update an object with the keywords that were searched
 function updateKeywordsObj(searchedWord) {
@@ -81,7 +79,6 @@ function togglePopularKeywords() {
     }
 }
 
-
 function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
     elKeyWords.innerHTML = '';
@@ -103,12 +100,10 @@ function renderPopularKeywords() {
 //---------------------Meme Editor
 function memeEditor(imgId) {
 
-
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
-    gMeme = {imgId: imgId, labels: [{txt: 'text', color: '#456', shadow: '#456',size: '60px'},{txt: 'text', color: '#456',shadow: '#456',size: '10px'}]};
+    gMeme = {imgId: imgId, labels: [{txt: '', color: '#456', shadow: 'no',size: 30},{txt: '', color: '#456',shadow: 'no',size: 30}]};
     // When opens the editor - intiate the canvas with the imageId that was clicked
-    var imgSrc = imgIdToUrl(imgId);
-    initCanvas(imgSrc);
+    drawCanvas();
 
     // Hide gallery
     gAllElements.elSearchMemes.style.display = 'none';
@@ -132,50 +127,81 @@ function backToGallery() {
 
 //------------------------------Canvas-----------------------------------------//
 
-//---------------------Init canvas
-function initCanvas(imgSrc) {
-    
-    var img = new Image();
-    img.src = imgSrc;
-
-    // Draw on canvas after the image is loaded from server or from url
-    img.onload = function () {
-        gElMemeCanvas.width = this.naturalWidth;
-        gElMemeCanvas.height = this.naturalHeight;
-        drawOnCanvas(gCtx, img);
-    };
-}
-
-//---------------------Draw on canvas the received image
-function drawOnCanvas(ctx, img) {
-    ctx.drawImage(img, 0, 0, 500,300);
-    ctx.font = "60px 'Segoe UI'";
-    ctx.fillText("print on Canvas", 60, 105);
-}
-
 //---------------------Edit Meme Change label
-function changeLabel(elLabel) {
-    gMeme.labels[0].txt = elLabel.value;
-    drawCanvas();
+function changeLabel(elLabel,labelLocation) {
+    if (labelLocation === 'top') {
+        gMeme.labels[0].txt = elLabel.value;
+        drawCanvas('top');
+    } else {
+        gMeme.labels[1].txt = elLabel.value;
+        drawCanvas('bottom');
+    }
 }
 
 //---------------------Init the canvas when image in gallery was clicked or recieved url from user in input
-function drawCanvas() {
-
+function drawCanvas(labelLocation) {
     var img = new Image();
     img.src = imgIdToUrl(gMeme.imgId);
 
-    // Draw on canvas after the image is loaded from server or from url
+    //Draw on canvas after the image is loaded from server or from url
     img.onload = function () {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
-        gCtx.drawImage(img, 60, 105, 500, 300);
-        gCtx.font = '"'+gMeme.labels[0].size + " Segoe UI ";
-        console.log(' gCtx.font ', gCtx.font );
-        gCtx.fillText(gMeme.labels[0].txt, 60, 105);
-    };
+        gCtx.drawImage(img, 12, 12, img.width, img.height);
+        if(labelLocation === 'top') {
+            // gCtx.font = '"' + gMeme.labels[0].size + " Segoe UI ";
+            gCtx.font = gMeme.labels[0].size + "px Segoe UI";
+            gCtx.fillText(gMeme.labels[0].txt, 50, 105);
+        } else {
+            gCtx.font = gMeme.labels[1].size + "px Segoe UI";
+            console.log('gCtx.font',gCtx.font);
+            gCtx.fillText(gMeme.labels[1].txt, 60, 220);
+        }
+     };
 }
 
+function clearInput(labelLocation) {
+    var input;
+    if (labelLocation === 'top') {
+        input = document.querySelector('.meme-label-top');
+        input.value = "";
+        gMeme.labels[0].txt = "";
+        drawCanvas('top');
+    } else {
+        input = document.querySelector('.meme-label-bottom');
+        input.value = "";
+        gMeme.labels[1].txt = "";
+        drawCanvas('bottom');
+    }
+}
+
+function increaseFontSize() {
+
+}
+
+function decreaseFontSize() {
+
+}
+
+function changeFontColor() {
+
+}
+
+function changeFontShadow() {
+
+}
+
+function alignFontRight() {
+
+}
+
+function alignFontCenter() {
+
+}
+
+function alignFontLeft() {
+
+}
 //------------------------------End of Canvas-----------------------------------------//
 
 //---------------------Save the contact information from the DOM
