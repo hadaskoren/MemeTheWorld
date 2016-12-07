@@ -6,9 +6,7 @@ function initApp() {
     gElements.elSearchMemes = document.querySelector('.search-memes'),
     gElements.elMemesGallery = document.querySelector('.memes-gallery'),
     gElements.elGalleryEditor = document.querySelector('.gallery-editor')
-    
     createImages();
-
 } // *** End of initApp
 
 ///////// *** Opens the meme editor
@@ -19,7 +17,9 @@ function memeEditor(imgId) {
     // Show editor
     gElements.elGalleryEditor.style.display = 'block';
     // When opens the editor - intiate the canvas with the imageId that was clicked
-    initCanvas(imgId, false);
+    var imgSrc = imgIdToUrl(imgId);
+    console.log('imgSrc', imgSrc);
+    initCanvas(imgSrc);
 } // *** End of memeEditor
 
 ///////// *** Initiates the meme generator
