@@ -4,9 +4,13 @@
 var gAllElements = {};
 // GLOBAL MODEL
 var gImages = [];
+
 //GLOBAL vars
 var gPrevSearchKeyword;
 var gPrevSearchEndIndex;
+
+// GLOBAL toggleKeywords
+var gIsKeywordsPanelOpen = false;
 
 ///////// *** Initiates the meme generator on window load
 function initApp() {
@@ -40,6 +44,16 @@ function backToGallery() {
     // Hide editor
     gAllElements.elGalleryEditor.style.display = 'none';
 } // *** End of backToGallery
+
+function togglePopularKeywords() {
+    gIsKeywordsPanelOpen = !gIsKeywordsPanelOpen;
+    var elKeywordsPanel = document.querySelector('.popularKeywords');
+    if (gIsKeywordsPanelOpen) {
+        elKeywordsPanel.style.display = 'none';
+    } else {
+        elKeywordsPanel.style.display = 'block';
+    }
+}
 
 ///////// *** Renders images into DOM from array of images objects
 function renderImages(images) {
@@ -113,6 +127,7 @@ function updateGallery(keyword) {
     for (var i = 0; i <= currSearchEndIndex; i++) {
         // Make current image.keywords into a string
         var keywordsAsStr = gImages[i].keywords.join('');
+
         // Check if the search keyword is inside the new image.keywords string 
         if (keywordsAsStr.indexOf(keyword) !== -1) {
             matchingImages.push(gImages[i]);
@@ -181,4 +196,6 @@ gImages = [
             'kong-fu', 'excited', 'aww', 'happy']
     }
 ];
+
+
 

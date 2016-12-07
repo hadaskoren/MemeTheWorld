@@ -1,10 +1,12 @@
 .gallery {
   height: 724px;
   display: block;
+  position: relative;
 }
 
 .memes-gallery-image {
 }
+
 
 .toggle-popular-keywords {
     width: 136px;
@@ -14,4 +16,19 @@
 }
 
 .memes-gallery {
+  margin-top: em(20px);
+  
+}
+
+.popularKeywords {
+  width: 350px;
+  height: 400px;
+  background-color: grey;
+  display: none;
+  position: absolute;
+  top: 136px;
+  right: 71px;
+  z-index: 2;
+  padding: em(15px);
+  color: white;
 }
