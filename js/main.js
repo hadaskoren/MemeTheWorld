@@ -4,6 +4,8 @@
 var gAllElements = {};
 // GLOBAL MODEL
 var gImages = [];
+// GLOBAL toggleKeywords
+var gIsKeywordsPanelOpen = false;
 
 ///////// *** Initiates the meme generator on window load
 function initApp() {
@@ -93,9 +95,19 @@ function saveContact() {
 
 ///////// *** Create the images' global model
 function createImages() {
-    for (var i = 0; i < 8; i++) {
+    for (var i = 0; i < 6; i++) {
         gImages.push({id: 'img'+(i+1), url:"", keywords: []});
     }
     // Renders the images created
     renderImages(gImages);
-} // *** End of renderImages
+} // *** End of creatImages
+
+function togglePopularKeywords() {
+    gIsKeywordsPanelOpen = !gIsKeywordsPanelOpen;
+    var elKeywordsPanel = document.querySelector('.popularKeywords');
+    if (gIsKeywordsPanelOpen) {
+        elKeywordsPanel.style.display = 'none';
+    } else {
+        elKeywordsPanel.style.display = 'block';
+    }
+}

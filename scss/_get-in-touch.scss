@@ -4,6 +4,7 @@
     display: block;
     font-family: var(--secondary-font);
     margin-bottom: 2%;
+    
 }
 
 .get-in-touch-headline label {
@@ -25,21 +26,28 @@
     height: 117px;
     font-family: LatoBlack, LatoRegular;
     color: var(--gray-font-secondary-color);
+    word-spacing: 8px;
 }
 
 .get-in-touch-details-contact {
-    width: 183px;
+    width: 152px;
     height: 54px;
     color: var(--gray-font-secondary-color);
-    margin-top: 34%;
+    margin-top: 29%;
     margin-left: -2%;
     font-family: LatoBold;
+    padding-left: 5px;
 }
 
 .get-in-touch-details {
     width: 367px;
     height: 211px;
     margin-left: 2%;
-    margin-top: 15%;
+    margin-top: 14%;
     font-size: rem(12px);
+    
+}
+
+.iconsLocation {
+    margin-right: 10px;
 }
