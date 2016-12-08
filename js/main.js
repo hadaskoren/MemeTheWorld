@@ -101,6 +101,7 @@ function memeEditor(elImgSrc) {
     if(gMeme === null) {
         gMeme = {imgSrc: elImgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
     }
+    gMeme.imgSrc = elImgSrc;
     // When opens the editor - intiate the canvas with the imageId that was clicked
     drawCanvas();
     // Hide gallery
