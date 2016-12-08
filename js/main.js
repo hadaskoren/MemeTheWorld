@@ -30,7 +30,7 @@ function initApp() {
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
     // Canvas globals
     gElMemeCanvas = document.querySelector('.memeCanvas');
-    
+    gCtx = gElMemeCanvas.getContext('2d');
 
     renderImages(gImages);
     renderPopularKeywords();
@@ -68,8 +68,6 @@ function updateKeywordsObj(keyword) {
     if (!keyFound) {
         gPopularKeywords.push({ keyword: keyword, rating: 1 })
     }
-
-
     renderPopularKeywords();
 }
 
@@ -85,11 +83,6 @@ function renderPopularKeywords() {
             (+gPopularKeywords[i].rating) + '" class="flex justify-center flex-wrap align-center">' +
             gPopularKeywords[i].keyword + '</span>';
     }
-    // for (var i = elKeyWords.children.length; i >= 0; i--) {
-    //     var randIndex = Math.random() * i | 0;
-    //     elKeyWords.appendChild(elKeyWords.children[randIndex]);
-    // }
-
     $(".keywords-cloud span").tagcloud({
         size: { start: 12, end: 32, unit: "px" },
         color: { start: '#323232', end: '#323232' }
@@ -104,21 +97,18 @@ function searchByKeyword(keyword) {
 
 //---------------------Meme Editor
 function memeEditor(elImgSrc) {
-
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
     if(gMeme === null) {
         gMeme = {imgSrc: elImgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
     }
-
+    gMeme.imgSrc = elImgSrc;
     // When opens the editor - intiate the canvas with the imageId that was clicked
     drawCanvas();
-
     // Hide gallery
     gAllElements.elSearchMemes.style.display = 'none';
     gAllElements.elMemesGallery.style.display = 'none';
     // Show editor
     gAllElements.elGalleryEditor.style.display = 'block';
-
     if (gPrevSearchKeyword) {
         updateKeywordsObj(gPrevSearchKeyword);
     }
@@ -143,11 +133,9 @@ function backToGallery() {
 function changeLabel(elLabel, labelLocation) {
     if (labelLocation === 'top') {
         gMeme.labels[0].txt = elLabel.value;
-
         if(gMeme.labels[0].txt.length < gElMemeCanvas.width / gMeme.labels[0].size * 2) {
             drawCanvas();
         }
-
     } else {
         gMeme.labels[1].txt = elLabel.value;
         drawCanvas();
@@ -161,7 +149,6 @@ function changeLabel(elLabel, labelLocation) {
 function drawCanvas() {
     var img = new Image();
     img.src = gMeme.imgSrc;
-    gCtx = gElMemeCanvas.getContext('2d');
 
     //Draw on canvas after the image is loaded from server or from url
     img.onload = function() {
@@ -195,7 +182,6 @@ function clearInput(labelLocation) {
 function increaseFontSize(labelLocation) {
     if(labelLocation === 'top') {
         gMeme.labels[0].size += 5;
-        
     } else {
         gMeme.labels[1].size += 5;
     }
@@ -264,7 +250,6 @@ function updateGallery(keyword) {
     if (gPrevSearchKeyword && (keyword.slice(0, -1) === gPrevSearchKeyword)) {
         currSearchEndIndex = gPrevSearchEndIndex;
     }
-
     gPrevSearchKeyword = keyword;
     var matchingImages = [];
 

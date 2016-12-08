@@ -14,9 +14,6 @@ html {
   @include for-tablet-only {
     font-size: rem(14px);
   }
-  // @include for-mobile-only {
-  //   font-size: rem(12px);
-  // }
 }
 
 h2, h3 {

@@ -12,6 +12,7 @@
 </head>
 
 <body onload="initApp()">
+<!--Nav Bar-->  
     <nav class="nav-bar">
         <!--<img class="pointy-thingy" src="assets/img/pointy-thingy.png">-->
         <ul class="flex align-center justify-center space-between clean-list nav-bar-items">
@@ -24,7 +25,7 @@
             <li class="nav-bar-item"><a href="#">GET IN TOUCH</a></li>
         </ul>
     </nav>
-
+<!--Gallery-->    
     <section class="gallery">
         <div class="hr-wrapper flex space-between">
             <hr>
@@ -43,10 +44,9 @@
                     <button class="fa fa-cloud-download" aria-hidden="true" onclick="imgFromUrl()"></button>
                 </div>
                 <div class="keywords-container flex flex-column">
-                <h4>Most Popular Keywords:</h4>
-                <div class="keywords-cloud flex flex-wrap space-around">
-                </div>
-
+                    <h4>Most Popular Keywords:</h4>
+                    <div class="keywords-cloud flex flex-wrap space-around">
+                    </div>
                 </div>
             </div>
             <div class="memes-gallery flex flex-wrap space-around">
@@ -60,19 +60,17 @@
                         <canvas class="memeCanvas">Sorry, no canvas available</canvas>
                     </div>
                     <div class="edit-text flex flex-column space-between">
-
                         <div>
-                            <div> 
+                            <div>
                                 <input class="meme-label-top" onkeyup="changeLabel(this,'top')" type="text" placeholder="Insert top text..."></input>
                                 <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('top')"></button>
                             </div>
                             <div>
                                 <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('top')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('top')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input  type="color" class="font-color" onchange="changeFontColor('top', this)"></input>
+                                <input type="color" class="font-color" onchange="changeFontColor('top', this)"></input>
                                 <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('top')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
                             </div>
-
                             <div class="align-buttons">
                                 <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('top')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
                                 <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('top')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
@@ -88,7 +86,7 @@
                             <div>
                                 <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('bottom')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('bottom')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input  type="color" class="font-color" onchange="changeFontColor('bottom', this)"></input>
+                                <input type="color" class="font-color" onchange="changeFontColor('bottom', this)"></input>
                                 <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('bottom')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
                             </div>
                             <div>
@@ -97,7 +95,6 @@
                                 <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('bottom')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div>
@@ -109,7 +106,7 @@
         </div>
         <hr>
     </section>
-
+<!--About-->
     <section class="about">
         <div class="inner-container flex flex-column">
             <article class="developer-info flex">
@@ -175,7 +172,7 @@
             </article>
         </div>
     </section>
-
+<!--Get In Touch-->
     <section class="get-in-touch flex flex-wrap">
         <!--<div class="hr">-->
         <hr>

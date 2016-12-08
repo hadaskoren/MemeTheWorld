@@ -4,11 +4,13 @@
     height: 528 px;
     width: 100%;
     margin: auto;
-     
+    border-radius: 2%;
+    box-shadow: 0 0 8px 4px rgba(120, 120, 120, 0.75);
 }
 
 .back-to-gallery {
     margin: em(5px);
+    color: #b3d0ea;
 }
 
 .edit-text{
@@ -35,13 +37,7 @@
 } 
 
 .edit-text input {
-    /*margin-bottom: 2%;*/
-    /*margin-top: 20%;*/
     padding: 10px;
-}
-
-.edit-text .meme-label-top {
-    /*margin-top: 10%;*/
 }
 
 .delete-top-text {
@@ -55,10 +51,6 @@
 .save-image{
     margin: 2%;
 }
-
-/*.align-buttons {
-    margin-bottom: 25%;
-}*/
 
 .increase-font-size, .decrease-font-size{
     border-radius: 50%;
