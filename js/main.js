@@ -32,24 +32,27 @@ function initApp() {
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
     // Canvas globals
     gElMemeCanvas = document.querySelector('.memeCanvas');
-    gCtx = gElMemeCanvas.getContext('2d');
+    
 
     renderImages(gImages);
 }
 
 //---------------------Renders images into DOM from array of images objects
 function renderImages(images) {
+    var url;
+    var imgSrc;
     var elMemesGallery = document.querySelector('.memes-gallery');
     images.forEach(function (image) {
-        // Ask Yaron about URL
-        // if(image.url !== "") {
-        //     url = image.url;
-        // }
+        if(image.url !== "") {
+            url = image.url;
+        } else {
+            imgSrc = imgIdToUrl(image.id);
+        }
 
         // Add to DOM the HTML tags image after image
         elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
-            'style="background-image: url(' + imgIdToUrl(image.id) + ');" ' +
-            'onclick="memeEditor(\'' + image.id + '\')">' +
+            'style="background-image: url(' + imgSrc + ');" ' +
+            'onclick="memeEditor(\'' + imgSrc + '\')">' +
             '<div class="hexTop"></div><div class="hexBottom"></div></div>';
     });
 }
@@ -104,12 +107,13 @@ function searchByKeyword(keyword) {
 }
 
 //---------------------Meme Editor
-function memeEditor(imgId) {
+function memeEditor(imgSrc) {
 
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
-
-    gMeme = {imgId: imgId, labels: [{txt: '', color: '#456', shadow: 'no',size: 30},{txt: '', color: '#456',shadow: 'no',size: 30}]};
-
+    if(gMeme === null) {
+        gMeme = {imgSrc: imgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
+    }
+    console.log('gMeme',gMeme);
     // When opens the editor - intiate the canvas with the imageId that was clicked
     drawCanvas();
 
@@ -140,35 +144,37 @@ function changeLabel(elLabel,labelLocation) {
     if (labelLocation === 'top') {
         gMeme.labels[0].txt = elLabel.value;
         if(gMeme.labels[0].txt.length < gElMemeCanvas.width/gMeme.labels[0].size*2) {
-            drawCanvas('top');
+            drawCanvas();
         }
-        
     } else {
         gMeme.labels[1].txt = elLabel.value;
-        drawCanvas('bottom');
+        drawCanvas();
+        if(gMeme.labels[1].txt.length < gElMemeCanvas.width/gMeme.labels[1].size*2) {
+            drawCanvas();
+        }
     }
 }
 
 //---------------------Init the canvas when image in gallery was clicked or recieved url from user in input
-function drawCanvas(labelLocation) {
+function drawCanvas() {
     var img = new Image();
-    img.src = imgIdToUrl(gMeme.imgId);
+    img.src = gMeme.imgSrc;
+    gCtx = gElMemeCanvas.getContext('2d');
 
     //Draw on canvas after the image is loaded from server or from url
     img.onload = function () {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
-        if(labelLocation === 'top') {
-            // gCtx.font = '"' + gMeme.labels[0].size + " Segoe UI ";
-            gCtx.font = gMeme.labels[0].size + "px Segoe UI";
-            gCtx.fillText(gMeme.labels[0].txt, 50, 105);
-        } else {
-            gCtx.font = gMeme.labels[1].size + "px Segoe UI";
-            console.log('gCtx.font',gCtx.font);
-            gCtx.fillText(gMeme.labels[1].txt, 60, 220);
-        }
-     };
+        gCtx.font = gMeme.labels[0].size + "px Segoe UI";
+        gCtx.font = gMeme.labels[1].size + "px Segoe UI";
+        console.log('gMeme.labels[0].color',gMeme.labels[0].color);
+        gCtx.fillStyle = gMeme.labels[0].color+'';
+        console.log('gCtx.fillStyle'," "+ gMeme.labels[0].color+" ");
+        gCtx.fillStyle = gMeme.labels[1].color;
+        gCtx.fillText(gMeme.labels[0].txt, 50, 105);
+        gCtx.fillText(gMeme.labels[1].txt, 60, 220);
+    }
 }
 
 function clearInput(labelLocation) {
@@ -186,16 +192,35 @@ function clearInput(labelLocation) {
     }
 }
 
-function increaseFontSize() {
-
+function increaseFontSize(labelLocation) {
+    if(labelLocation === 'top') {
+        gMeme.labels[0].size += 5;
+        
+    } else {
+        gMeme.labels[1].size += 5;
+    }
+    drawCanvas();
 }
 
-function decreaseFontSize() {
-
+function decreaseFontSize(labelLocation) {
+    if(labelLocation === 'bottom') {
+        gMeme.labels[1].size -= 5;
+    } else {
+        gMeme.labels[0].size -= 5;
+    }
+    drawCanvas();
 }
 
-function changeFontColor() {
-
+function changeFontColor(labelLocation , el) {
+    console.log('I work');
+    var currval = el.value;
+    console.log('currval',currval);
+    if(labelLocation === 'top') {
+        gMeme.labels[0].color = currval;
+    } else {
+        gMeme.labels[1].color = currval;
+    }
+    drawCanvas();
 }
 
 function changeFontShadow() {
