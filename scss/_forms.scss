@@ -4,21 +4,27 @@
   font-family: var(--primary-font);
 }
 
-.form-control {
-  border: none;
-  border-bottom: 1px solid #000;
-  background-color: transparent;
-  width: 100%;
-  padding: 0.5em 0.2em;
-}
-
-.form-group {
-  margin: 1em 0;
-}
-
 .get-in-touch-form {
   width: 580px;
-  
+  flex-shrink: 3;
+  @include for-tablet-only {
+    width: 540px;
+  }
+
+  @media (max-width: 740px) {
+      width: 470px;
+    }
+
+  @media (max-width: 695px) {
+      width: 430px;
+    }
+
+  @media (max-width: 660px) {
+      width: 380px;
+    }
+  @media (max-width: 610px) {
+      width: 100%;
+    }
 }
 
 .get-in-touch-form input,textarea {
@@ -33,17 +39,19 @@
   height: 148px;
 }
 
-.submit-form{
-  background-color: var(--font-secondary-color);
+.submit-form {
+  width: 90px;
+  align-self: flex-end;
+  margin-bottom: 53px;
+  background-color: #2eb398;
   border: none;
   font-size: rem(12px);
   font-family: var(--primary-font);
   padding: 11px 30px;
   color: var(--font-primary-color);
-  margin-top: 1%;
-  margin-bottom: em(50px);
-}
 
-.submit-contact{
-  width: 580px;
+  @media (max-width: 610px) {
+    margin-bottom: 20px;
+  }
+
 }

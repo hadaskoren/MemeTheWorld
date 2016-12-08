@@ -12,7 +12,7 @@
 </head>
 
 <body onload="initApp()">
-<!--Nav Bar-->  
+    <!--Nav Bar-->
     <nav class="nav-bar">
         <!--<img class="pointy-thingy" src="assets/img/pointy-thingy.png">-->
         <ul class="flex align-center justify-center space-between clean-list nav-bar-items">
@@ -25,7 +25,7 @@
             <li class="nav-bar-item"><a href="#">GET IN TOUCH</a></li>
         </ul>
     </nav>
-<!--Gallery-->    
+    <!--Gallery-->
     <section class="gallery">
         <div class="hr-wrapper flex space-between">
             <hr>
@@ -106,13 +106,13 @@
         </div>
         <hr>
     </section>
-<!--About-->
+    <!--About-->
     <section class="about">
         <div class="inner-container flex flex-column">
             <article class="developer-info flex">
                 <div class="developer-info-header header-top">
                     <h2>Hadas Koren</h2>
-                    <h3>Illustrator &amp; Character Designer</h3>
+                    <h3>Full-stack Web Developer &amp; App Designer</h3>
                 </div>
                 <div class="developer-img hexagon dev-hadas">
                     <div class="hexTop"></div>
@@ -121,7 +121,7 @@
                 <div class="developer-summary flex flex-column space-between">
                     <div class="developer-info-header header-side">
                         <h2>Hadas Koren</h2>
-                        <h3>Illustrator &amp; Character Designer</h3>
+                        <h3>Full-stack Web Developer &amp; App Designer</h3>
                     </div>
                     <div class="developer-info-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur
@@ -142,7 +142,7 @@
             <article class="developer-info flex">
                 <div class="developer-info-header header-top">
                     <h2>Omer Zfira</h2>
-                    <h3>Illustrator &amp; Character Designer</h3>
+                    <h3>Full-stack Web Developer &amp; App Designer</h3>
                 </div>
                 <div class="developer-img hexagon dev-omer">
                     <div class="hexTop"></div>
@@ -151,7 +151,7 @@
                 <div class="developer-summary flex flex-column space-between">
                     <div class="developer-info-header header-side">
                         <h2>Omer Zfira</h2>
-                        <h3>Illustrator &amp; Character Designer</h3>
+                        <h3>Full-stack Web Developer &amp; App Designer</h3>
                     </div>
                     <div class="developer-info-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur
@@ -172,44 +172,44 @@
             </article>
         </div>
     </section>
-<!--Get In Touch-->
+    <!--Get In Touch-->
     <section class="get-in-touch flex flex-wrap">
         <!--<div class="hr">-->
         <hr>
-        <div class="inner-container flex">
-            <div>
-                <div class="get-in-touch-headline">
-                    <h2>Get In Touch</h2>
-                    <label>In order to get in touch use the contact form below:</label>
-                </div>
-                <div class="get-in-touch-form flex flex-column space-between">
-                    <input id="name" type="text" placeholder="Name(Required)"></input>
-                    <input id="email" type="email" placeholder="Email(Required)"></input>
-                    <input id="subject" type="text" placeholder="Subject"></input>
-                    <textarea id="msg" type="text" placeholder="Write your message here..."></textarea>
-                </div>
-                <div class="submit-contact flex flex-end">
-                    <button type="submit" class="submit-form" onClick="saveContact()">SEND</button>
-                </div>
+        <div class="inner-container">
+
+            <div class="get-in-touch-headline">
+                <h2>Get In Touch</h2>
+                <label>In order to get in touch use the contact form below:</label>
             </div>
-            <div class="get-in-touch-details flex flex-column">
-                <div class="get-in-touch-details-extra">
-                    Quisque Hendrerit: purus dapibus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. Proin sit amet volutpat libero.
-                    Nulla sed nunc et tortor luctus faucibus morbi vitae.
-                </div>
-                <div class="get-in-touch-details-contact flex">
-                    <div>
-                        <img class="iconsLocation flex" src="assets/img/3-layers.png">
+
+            <div class="get-in-touch-wrapper flex">
+
+                    <div class="get-in-touch-form flex flex-column space-between">
+                        <input id="name" type="text" placeholder="Name(Required)"></input>
+                        <input id="email" type="email" placeholder="Email(Required)"></input>
+                        <input id="subject" type="text" placeholder="Subject"></input>
+                        <textarea id="msg" type="text" placeholder="Write your message here..."></textarea>
+                        <button type="submit" class="submit-form" onClick="saveContact()">SEND</button>
                     </div>
-                    <div>
-                        Elm St. 14/05 Lost City + 3528 331 86 35 info@hexalcorp.com
+
+                <div class="get-in-touch-details flex flex-column">
+                    <div class="get-in-touch-details-extra">
+                        <span class="bold">Quisque Hendrerit:</span> purus dapibus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. Proin sit amet volutpat libero.
+                        Nulla sed nunc et tortor luctus faucibus morbi vitae.
                     </div>
+                    <ul class="get-in-touch-details-contact clean-list flex flex-column">
+                        <li><span class="fa fa-map-marker" aria-hidden="true"></span>Elm St. 14/05 Lost City</li>
+                        <li><span class="fa fa-phone fa-flip-horizontal" aria-hidden="true"></span>+ 3528 331 86 35</li>
+                        <li><span class="fa fa-envelope" aria-hidden="true"></span>info@hexalcorp.com</li>
+                        <!--<img class="iconsLocation flex" src="assets/img/3-layers.png">-->
+                    </ul>
                 </div>
+
             </div>
-        </div>
-        <hr>
+            <hr>
     </section>
-    </div>
+
     <footer>
         &copy; copyrights 2016 by Hadas&amp;Omer.ltd
     </footer>
