@@ -4,9 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "npm-run-all --parallel browser styles",
+    "start": "npm-run-all --parallel browser stylesBuild styles",
     "browser": "browser-sync start --server --files *.html, dist/*.css",
-    "styles": "node-sass scss/style.scss -o dist -W",
+    "stylesBuild": "node-sass scss/style.scss -o dist",
+    "styles": "node-sass scss/style.scss -o dist -w",
     "build": "rm -rf build && copyfiles assets/* index.html assets/fonts/**/* dist/* build"
   },
   "devDependencies": {
