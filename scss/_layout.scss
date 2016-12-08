@@ -24,12 +24,12 @@
   min-height: 250px;
   display: block;
   position: relative;
-  // overflow: hidden;
   @include section-padding;
 
   h1 {
     margin-top: 0;
     padding-top: em(15px);
+    color: #2eb398;
   }
 }
 

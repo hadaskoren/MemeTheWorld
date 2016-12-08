@@ -124,6 +124,10 @@ function memeEditor(elImgSrc) {
     }
 }
 
+function imgFromUrl() {
+    var imgUrl = document.querySelector('#image-from-url').value;
+    memeEditor(imgUrl);
+}
 //---------------------Meme Editor Back button
 function backToGallery() {
     // Show gallery

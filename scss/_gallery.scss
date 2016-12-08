@@ -36,13 +36,15 @@
 .keywords-container {
   order: 3;
   margin: 5px;
+  width: 100%;
 
   @include for-mobile-only {
     justify-content: space-around;
   }
 
   h4 {
-    text-decoration: underline;
+    text-decoration: none;
+    text-shadow: none;
   }
 
 }
