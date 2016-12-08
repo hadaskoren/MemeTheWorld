@@ -94,7 +94,7 @@ function renderPopularKeywords() {
 
     $(".keywords-cloud span").tagcloud({
         size: { start: 12, end: 32, unit: "px" },
-        color: { start: '#323232', end: '#2eb398' }
+        color: { start: '#323232', end: '#323232' }
     });
 }
 

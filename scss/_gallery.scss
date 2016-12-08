@@ -10,40 +10,54 @@
   margin-right: 5px;
 }
 
-.toggle-popular-keywords {
-    width: 136px;
-}
 
 .search-memes {
+  &>input , div {
+    margin: 3px 0;
+  }
+  @include for-mobile-only {
+    justify-content: space-around;
+  }
 }
-
+.toggle-gallery-display {
+    @media (max-width: 553px) {
+      order: 2;
+    }
+}
 .memes-gallery {
   margin-top: em(20px);
+    
+  @media (max-width: 763px) {
+   max-height: 560px;
+   overflow: scroll;
+  }
 }
 
-.popularKeywords {
-  width: 350px;
-  background-color: #323232;
-  opacity: 0.9;
-  display: none;
-  position: absolute;
-  top: 136px;
-  right: 71px;
-  z-index: 99;
-  padding: em(15px);
-  box-shadow: 1px 1px 8px 4px  rgba(20, 20, 20, 0.9);
-}
+.keywords-container {
+  order: 3;
+  margin: 5px;
 
+  @include for-mobile-only {
+    justify-content: space-around;
+  }
+
+  h4 {
+    text-decoration: underline;
+  }
+
+}
 .keywords-cloud {
   height: 100%;
   flex-grow: 1;
-  margin: 5px;
+  margin: 5px 0;
   background-color: white;
   display: flex;
-  box-shadow: 0 1px 4px 2px  rgba(20, 20, 20, 0.9);
   padding: 3px;
+  text-shadow: none;
+  box-shadow: 0 0 1px 1px  rgba(170, 170, 170, 0.9); 
 
   span {
+    font-family: MavenProRegular;
     margin-right: 2px;
     margin-left: 2px;
     line-height: 1.15;
@@ -51,7 +65,7 @@
     cursor: pointer;
 
     &:hover {
-      font-weight: 600;
+      font-weight: 900;
     }
   }
 }

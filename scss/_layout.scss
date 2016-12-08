@@ -21,11 +21,10 @@
 }
 
 .gallery {
-  // min-height: 724px;
-  height: 724px; // REMOVE this and enable COMMENT ABOVE
+  min-height: 250px;
   display: block;
   position: relative;
-  overflow: hidden;
+  // overflow: hidden;
   @include section-padding;
 
   h1 {
