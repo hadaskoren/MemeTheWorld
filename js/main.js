@@ -139,7 +139,10 @@ function backToGallery() {
 function changeLabel(elLabel,labelLocation) {
     if (labelLocation === 'top') {
         gMeme.labels[0].txt = elLabel.value;
-        drawCanvas('top');
+        if(gMeme.labels[0].txt.length < gElMemeCanvas.width/gMeme.labels[0].size*2) {
+            drawCanvas('top');
+        }
+        
     } else {
         gMeme.labels[1].txt = elLabel.value;
         drawCanvas('bottom');
