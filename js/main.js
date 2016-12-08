@@ -11,10 +11,10 @@ var gPrevSearchEndIndex;
 
 // GLOBALS for popular keywords
 var gIsKeywordsPanelOpen = true;
-var gPopularKeywordsObj = {};
+var gPopularKeywords = {};
 var gCloudSettings;
 
-gPopularKeywordsObj = { baby: 2, human: 2, dog: 4, 'sweet brown': 4, futurama: 6, fry: 6, panda: 7, animal: 9, mordor: 9, 'nobody got time': 15 };
+
 
 // GLOBAL meme
 var gMeme = null;
@@ -24,7 +24,7 @@ var gCtx;
 //---------------------Initiates the meme generator on window load
 function initApp() {
     var contactUsers = [];
-   
+
     localStorage['users'] = JSON.stringify(contactUsers);
     // Assign global elements
     gAllElements.elSearchMemes = document.querySelector('.search-memes');
@@ -35,12 +35,13 @@ function initApp() {
     gCtx = gElMemeCanvas.getContext('2d');
 
     renderImages(gImages);
+    renderPopularKeywords();
 }
 
 //---------------------Renders images into DOM from array of images objects
 function renderImages(images) {
     var elMemesGallery = document.querySelector('.memes-gallery');
-    images.forEach(function (image) {
+    images.forEach(function(image) {
         // Ask Yaron about URL
         // if(image.url !== "") {
         //     url = image.url;
@@ -56,50 +57,47 @@ function renderImages(images) {
 
 //---------------------Update an object with the keywords that were searched
 function updateKeywordsObj(keyword) {
-    if (!gPopularKeywordsObj[keyword]) {
-        gPopularKeywordsObj[keyword] = 1;
-    } else {
-        gPopularKeywordsObj[keyword]++;
+    var keyFound = false;
+    for (var i = 0; i < gPopularKeywords.length && !keyFound; i++) {
+        if (gPopularKeywords[i].keyword === keyword) {
+            gPopularKeywords[i].rating++;
+            keyFound = true;
+        }
     }
-    console.log('gSearchedKeywordsObj', gPopularKeywordsObj);
-}
-
-//---------------------Popular Keywords panel Open and close
-
-function togglePopularKeywords() {
-    gIsKeywordsPanelOpen = !gIsKeywordsPanelOpen;
-    var elKeywordsPanel = document.querySelector('.popularKeywords');
-
-    if (gIsKeywordsPanelOpen) {
-        elKeywordsPanel.style.display = 'none';
-    } else {
-
-        elKeywordsPanel.style.display = 'block';
-        renderPopularKeywords();
+    if (!keyFound) {
+        gPopularKeywords.push({ keyword: keyword, rating: 1 })
     }
+
+
+    renderPopularKeywords();
 }
 
 function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
     elKeyWords.innerHTML = '';
-    for (var keyword in gPopularKeywordsObj) {
+
+    gPopularKeywords.sort(function(a, b) {
+        return b.rating - a.rating;
+    });
+    for (var i = 0; i < gPopularKeywords.length && i < 15; i++) {
         elKeyWords.innerHTML += '<span onclick="searchByKeyword(this.innerText)" rel="' +
-            gPopularKeywordsObj[keyword] + '" class="flex justify-center flex-wrap align-center">' +
-            keyword + '</span>';
+            (+gPopularKeywords[i].rating) + '" class="flex justify-center flex-wrap align-center">' +
+            gPopularKeywords[i].keyword + '</span>';
     }
-    for (var i = elKeyWords.children.length; i >= 0; i--) {
-        var randIndex = Math.random() * i | 0;
-        elKeyWords.appendChild(elKeyWords.children[randIndex]);
-    }
+    // for (var i = elKeyWords.children.length; i >= 0; i--) {
+    //     var randIndex = Math.random() * i | 0;
+    //     elKeyWords.appendChild(elKeyWords.children[randIndex]);
+    // }
 
     $(".keywords-cloud span").tagcloud({
-        size: { start: 15, end: 40, unit: "px" },
-        color: { start: '#323232', end: '#00ffbf' }
+        size: { start: 12, end: 32, unit: "px" },
+        color: { start: '#323232', end: '#2eb398' }
     });
 }
 
 function searchByKeyword(keyword) {
     gAllElements.elSearchMemes.querySelector('.search-by-keyword').value = keyword;
+    updateKeywordsObj(keyword);
     updateGallery(keyword);
 }
 
@@ -108,7 +106,7 @@ function memeEditor(imgId) {
 
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
 
-    gMeme = {imgId: imgId, labels: [{txt: '', color: '#456', shadow: 'no',size: 30},{txt: '', color: '#456',shadow: 'no',size: 30}]};
+    gMeme = { imgId: imgId, labels: [{ txt: '', color: '#456', shadow: 'no', size: 30 }, { txt: '', color: '#456', shadow: 'no', size: 30 }] };
 
     // When opens the editor - intiate the canvas with the imageId that was clicked
     drawCanvas();
@@ -136,13 +134,13 @@ function backToGallery() {
 //------------------------------Canvas-----------------------------------------//
 
 //---------------------Edit Meme Change label
-function changeLabel(elLabel,labelLocation) {
+function changeLabel(elLabel, labelLocation) {
     if (labelLocation === 'top') {
         gMeme.labels[0].txt = elLabel.value;
-        if(gMeme.labels[0].txt.length < gElMemeCanvas.width/gMeme.labels[0].size*2) {
+        if (gMeme.labels[0].txt.length < gElMemeCanvas.width / gMeme.labels[0].size * 2) {
             drawCanvas('top');
         }
-        
+
     } else {
         gMeme.labels[1].txt = elLabel.value;
         drawCanvas('bottom');
@@ -155,20 +153,20 @@ function drawCanvas(labelLocation) {
     img.src = imgIdToUrl(gMeme.imgId);
 
     //Draw on canvas after the image is loaded from server or from url
-    img.onload = function () {
+    img.onload = function() {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
-        if(labelLocation === 'top') {
+        if (labelLocation === 'top') {
             // gCtx.font = '"' + gMeme.labels[0].size + " Segoe UI ";
             gCtx.font = gMeme.labels[0].size + "px Segoe UI";
             gCtx.fillText(gMeme.labels[0].txt, 50, 105);
         } else {
             gCtx.font = gMeme.labels[1].size + "px Segoe UI";
-            console.log('gCtx.font',gCtx.font);
+            console.log('gCtx.font', gCtx.font);
             gCtx.fillText(gMeme.labels[1].txt, 60, 220);
         }
-     };
+    };
 }
 
 function clearInput(labelLocation) {
@@ -272,7 +270,7 @@ gImages = [
     {
         id: '1',
         url: "",
-        keywords: ['lord', 'rings', 'mordor', 'boromir','human',
+        keywords: ['lord', 'rings', 'mordor', 'boromir', 'human',
             'lord of the rings', 'one does not simply']
     },
     {
@@ -300,18 +298,54 @@ gImages = [
         url: "",
         keywords: ['animal', 'panda', 'kong fu',
             'kong-fu', 'excited', 'aww', 'happy']
-    }
-    // {
-    //     id: '7',
-    //     url: "",
-    //     keywords: ['star', 'wars', 'star wars', 'chewbacca',
-    //         'princess leia', 'kissing', 'love']
-    // },
-    // {
-    //     id: '8',
-    //     url: "",
-    //     keywords: ['animals', 'dog', 'surprised', 'shocked']
-    // },
+    },
+    {
+        id: '7',
+        url: "",
+        keywords: ['star', 'wars', 'star wars', 'chewbacca',
+            'princess leia', 'kissing', 'love']
+    },
+    {
+        id: '8',
+        url: "",
+        keywords: ['animals', 'dog', 'surprised', 'shocked']
+    },
 ];
 
-
+gPopularKeywords = [
+    {
+        keyword: 'baby',
+        rating: 2
+    },
+    {
+        keyword: 'human',
+        rating: 2
+    },
+    {
+        keyword: 'dog',
+        rating: 4
+    },
+    {
+        keyword: 'sweet brown',
+        rating: 4
+    },
+    {
+        keyword: 'futurama',
+        rating: 6
+    }, {
+        keyword: 'fry',
+        rating: 6
+    }, {
+        keyword: 'panda',
+        rating: 7
+    }, {
+        keyword: 'animal',
+        rating: 9
+    }, {
+        keyword: 'mordor',
+        rating: 9
+    }, {
+        keyword: 'nobody got time',
+        rating: 15
+    }
+];

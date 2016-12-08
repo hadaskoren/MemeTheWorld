@@ -6,6 +6,8 @@
 }
 
 .memes-gallery-image {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .toggle-popular-keywords {
@@ -33,20 +35,23 @@
 }
 
 .keywords-cloud {
-  width: 100%;
   height: 100%;
+  margin: 5px;
   background-color: white;
   display: flex;
-  box-shadow: 1px 1px 8px 4px  rgba(20, 20, 20, 0.9);
+  box-shadow: 0 1px 4px 2px  rgba(20, 20, 20, 0.9);
   padding: 3px;
 
   span {
-    margin: 2px;
-    padding: 5px;
+    margin-right: 2px;
+    margin-left: 2px;
+    line-height: 1.15;
     text-align: center;
     cursor: pointer;
-    border: 1px solid #323232;
-    border-radius: 50%;
+
+    &:hover {
+      font-weight: 600;
+    }
   }
 }
 

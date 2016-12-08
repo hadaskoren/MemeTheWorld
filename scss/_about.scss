@@ -4,6 +4,7 @@
 
     @include for-mobile-only {
         flex-direction: column;
+        align-items: center;
     }
 
     padding-bottom: 48px;
@@ -32,6 +33,7 @@
 
 .header-top {
     display: none;
+    text-align: center;
     @include for-mobile-only {
         display: block;
     }
@@ -72,44 +74,57 @@
 
       .facebook {
         background-color: lighten(#3B5998, 20%);
-          &:hover {
-        background-color: #3B5998;
-              
-          }
+        &:hover {
+            background-color: #3B5998;     
+        }
+
+        @include for-mobile-only {
+            background-color: #3B5998;
+        }
     }
       .twitter {
         background-color: lighten(#00aced, 20%);
-                    &:hover {
-        background-color: #00aced;
-              
-          }
+        &:hover {
+            background-color: #00aced;
+        }              
+        @include for-mobile-only {
+            background-color: #00aced;
+        }
     }
       .google {
         background-color: lighten(#dd4b39, 20%);
-                    &:hover {
-        background-color: #dd4b39;
-              
-          }
+        &:hover {
+            background-color: #dd4b39;     
+        }
+        @include for-mobile-only {
+            background-color: #dd4b39;
+        }        
     }
       .pinterest {
         background-color: lighten(#cb2027, 20%);
-                    &:hover {
-        background-color: #cb2027;
-              
-          }
+        &:hover {
+            background-color: #cb2027;    
+        }
+        @include for-mobile-only {
+            background-color: #cb2027;
+        }         
     }
       .linkedin {
         background-color: lighten(#007bb5, 20%);
-                    &:hover {
-        background-color: #007bb5;
-              
-          }
+        &:hover {
+            background-color: #007bb5;    
+        }
+        @include for-mobile-only {
+            background-color: #007bb5;
+        }          
     }
       .dribble {
         background-color: lighten(#ea4c89, 20%);
-                    &:hover {
-        background-color: #ea4c89;
-              
-          }
+        &:hover {
+            background-color: #ea4c89;
+        }
+        @include for-mobile-only {
+            background-color: #ea4c89;
+        }          
     }
 }

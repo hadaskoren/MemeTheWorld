@@ -11,9 +11,12 @@ html {
   font-family: var(--primary-font);
   font-size: 16px;
   text-shadow: 1px 1px 1px rgba(50,50,50,0.8);
-  @include for-mobile-only {
-    font-size: 14px;
+  @include for-tablet-only {
+    font-size: rem(14px);
   }
+  // @include for-mobile-only {
+  //   font-size: rem(12px);
+  // }
 }
 
 h2, h3 {

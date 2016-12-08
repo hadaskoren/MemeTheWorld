@@ -11,6 +11,12 @@
 
 /* Breakpoint mixins */
 
+@mixin for-tablet-only {
+  @media (max-width: $tablet-breakpoint) {
+    @content;
+  }
+}
+
 @mixin for-mobile-only {
   @media (max-width: $mobile-breakpoint) {
     @content;
