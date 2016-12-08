@@ -14,8 +14,6 @@ var gIsKeywordsPanelOpen = true;
 var gPopularKeywords = {};
 var gCloudSettings;
 
-
-
 // GLOBAL meme
 var gMeme = null;
 var gElMemeCanvas;
@@ -105,13 +103,12 @@ function searchByKeyword(keyword) {
 }
 
 //---------------------Meme Editor
-function memeEditor(imgSrc) {
+function memeEditor(elImgSrc) {
 
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
     if(gMeme === null) {
-        gMeme = {imgSrc: imgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
+        gMeme = {imgSrc: elImgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
     }
-    console.log('gMeme',gMeme);
 
     // When opens the editor - intiate the canvas with the imageId that was clicked
     drawCanvas();
@@ -168,12 +165,10 @@ function drawCanvas() {
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
         gCtx.font = gMeme.labels[0].size + "px Segoe UI";
-        gCtx.font = gMeme.labels[1].size + "px Segoe UI";
-        console.log('gMeme.labels[0].color',gMeme.labels[0].color);
-        gCtx.fillStyle = gMeme.labels[0].color+'';
-        console.log('gCtx.fillStyle'," "+ gMeme.labels[0].color+" ");
-        gCtx.fillStyle = gMeme.labels[1].color;
+        gCtx.fillStyle = gMeme.labels[0].color;
         gCtx.fillText(gMeme.labels[0].txt, 50, 105);
+        gCtx.font = gMeme.labels[1].size + "px Segoe UI";
+        gCtx.fillStyle = gMeme.labels[1].color;
         gCtx.fillText(gMeme.labels[1].txt, 60, 220);
     }
 }
@@ -184,12 +179,12 @@ function clearInput(labelLocation) {
         input = document.querySelector('.meme-label-top');
         input.value = "";
         gMeme.labels[0].txt = "";
-        drawCanvas('top');
+        drawCanvas();
     } else {
         input = document.querySelector('.meme-label-bottom');
         input.value = "";
         gMeme.labels[1].txt = "";
-        drawCanvas('bottom');
+        drawCanvas();
     }
 }
 
@@ -204,10 +199,10 @@ function increaseFontSize(labelLocation) {
 }
 
 function decreaseFontSize(labelLocation) {
-    if(labelLocation === 'bottom') {
-        gMeme.labels[1].size -= 5;
-    } else {
+    if(labelLocation === 'top') {
         gMeme.labels[0].size -= 5;
+    } else {
+        gMeme.labels[1].size -= 5;
     }
     drawCanvas();
 }
@@ -290,7 +285,7 @@ function clearGallery() {
 }
 
 function saveImg(elLink) {
-    elLink.href = canvas.toDataURL();
+    elLink.href = gElMemeCanvas.toDataURL();
     elLink.download = 'perfectMeme.jpg';
 }
 

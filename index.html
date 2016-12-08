@@ -51,43 +51,55 @@
                 <div>
                     <button class="back-to-gallery btn btn-link" onclick="backToGallery()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back to list</button>
                 </div>
-                <div class="flex">
+                <div class="canvas-wrapper flex flex-wrap">
                     <div>
                         <canvas class="memeCanvas">Sorry, no canvas available</canvas>
                     </div>
-                    <div class="edit-text flex flex-column">
+                    <div class="edit-text flex flex-column space-between">
+
                         <div>
-                            <input class="meme-label-top" onkeyup="changeLabel(this,'top')" type="text" placeholder="Insert top text..."></input>
-                            <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('top')"></button>
+                            <div> 
+                                <input class="meme-label-top" onkeyup="changeLabel(this,'top')" type="text" placeholder="Insert top text..."></input>
+                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('top')"></button>
+                            </div>
+                            <div>
+                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('top')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('top')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                <input  type="color" class="font-color" onchange="changeFontColor('top', this)"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('top')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                            </div>
+
+                            <div class="align-buttons">
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('top')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('top')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
+                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('top')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+                            </div>
                         </div>
+
                         <div>
-                            <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('top')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('top')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                            <input  type="color" class="font-color-top" onchange="changeFontColor('top', this)"></input>
-                            <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('top')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                            <div>
+                                <input class="meme-label-bottom" onkeyup="changeLabel(this,'bottom')" type="text" placeholder="Insert bottom text..."></input>
+                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
+                            </div>
+                            <div>
+                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('bottom')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('bottom')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
+                                <input  type="color" class="font-color" onchange="changeFontColor('bottom', this)"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('bottom')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                            </div>
+                            <div>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('bottom')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('bottom')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
+                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('bottom')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+                            </div>
                         </div>
-                        <div>
-                            <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('top')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
-                            <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('top')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
-                            <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('top')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
-                        </div>
-                        <div>
-                            <input class="meme-label-bottom" onkeyup="changeLabel(this,'bottom')" type="text" placeholder="Insert bottom text..."></input>
-                            <button class="delete-bottom-text   -trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
-                        </div>
-                        <div>
-                            <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('bottom')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                            <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('bottom')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                            <input  type="color" class="font-color-top" onchange="changeFontColor('bottom', this)"></input>
-                            <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('bottom')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
-                            <button class="font-align-right fa fa-align-right" aria-hidden="true" onclick="alignFontRight('bottom')"></button>
-                            <button class="font-align-center fa fa-align-center" aria-hidden="true" onclick="alignFontCenter('bottom')"></button>
-                            <button class="font-align-left fa fa-align-left" aria-hidden="true" onclick="alignFontLeft('bottom')"></button>
-                        </div>
+
                     </div>
                 </div>
                 <div>
-                    <button class="save-image btn btn-info" onclick="saveImg()">Save</button>
+                    <button class="save-image btn btn-info">
+                        <a href="#" onclick="saveImg(this)">Save</a>
+                    </button>
                 </div>
             </section>
         </div>

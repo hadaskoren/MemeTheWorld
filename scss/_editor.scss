@@ -2,8 +2,9 @@
     display: none;
     background-color: #323232;
     height: 528 px;
-    width: 777px;
+    width: 100%;
     margin: auto;
+     
 }
 
 .back-to-gallery {
@@ -15,10 +16,32 @@
     margin: 3%;
 }
 
+@media screen and (max-width: 925px) {
+    .edit-text {
+        flex-direction : row;
+        width: 100%; 
+        justify-content: space-around;  
+    }
+    .canvas-wrapper {
+        justify-content: center;
+        
+    }
+} 
+
+@media screen and (max-width: 630px) {
+    .gallery-editor {
+        height: 100%; 
+    }
+} 
+
 .edit-text input {
-    margin-bottom: 2%;
-    margin-top: 20%;
+    /*margin-bottom: 2%;*/
+    /*margin-top: 20%;*/
     padding: 10px;
+}
+
+.edit-text .meme-label-top {
+    /*margin-top: 10%;*/
 }
 
 .delete-top-text {
@@ -31,4 +54,27 @@
 
 .save-image{
     margin: 2%;
+}
+
+/*.align-buttons {
+    margin-bottom: 25%;
+}*/
+
+.increase-font-size, .decrease-font-size{
+    border-radius: 50%;
+    border: 1px solid var(--font-secondary-color);
+    background-color: var(--font-secondary-color);
+}
+
+.delete-top-text, .delete-bottom-text {
+    border: 1px solid black;
+    background-color: #bebebe;
+    color: red;
+}
+
+.font-color {
+    border: 1px solid black;
+    background-color: #bebebe;
+    color: red;
+    width: 30px;
 }
