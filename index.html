@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meme Generator</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
         crossorigin="anonymous">
@@ -32,14 +32,18 @@
         </div>
         <div class="inner-container">
             <h1>Create Your Meme:</h1>
-            <div class="search-memes flex space-between">
+            <div class="search-memes flex space-between flex-wrap">
                 <input type="text" class="search-by-keyword" oninput="updateGallery(this.value)" placeholder="Enter a keyword">
-                <div class="upload-by-url flex flex-column">
-                    <label for="image-from-url">Use an image from the web</label>
-                    <input type="url" id="image-from-url" class="" placeholder="Enter a URL" />
-                    <input type="button" value="Upload" class="" onclick="memeEditor()" />
+                <div class="upload-by-url flex">
+                    <input type="url" id="image-from-url" class="" placeholder="Paste an image URL" />
+                    <input type="button" value="->" class="" onclick="imgFromUrl()" />
                 </div>
-                <button class="btn btn-primary toggle-popular-keywords" onclick="togglePopularKeywords()">Popular Keywords</button>
+                <!--<button class="btn btn-primary toggle-popular-keywords" onclick="togglePopularKeywords()">Popular Keywords</button>-->
+                <!--<section class="popularKeywords">-->
+                    <div class="keywords-cloud flex flex-wrap space-around">
+
+                    </div>
+                <!--</section>-->
             </div>
             <div class="memes-gallery flex flex-wrap space-around">
             </div>
@@ -86,11 +90,6 @@
                     <button class="save-image btn btn-info" onclick="saveImg()">Save</button>
                 </div>
             </section>
-            <section class="popularKeywords">
-                <div class="keywords-cloud flex flex-wrap space-around">
-
-                </div>
-            </section>
         </div>
         <hr>
     </section>
@@ -129,7 +128,7 @@
             </article>
             <article class="developer-info flex">
                 <div class="developer-info-header header-top">
-                    <h2>Hadas Koren</h2>
+                    <h2>Omer Zfira</h2>
                     <h3>Illustrator &amp; Character Designer</h3>
                 </div>
                 <div class="developer-img hexagon dev-omer">
@@ -144,9 +143,7 @@
                     <div class="developer-info-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur
                         adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit
-                        amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem
-                        ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        amet, consectetur adipisicing elit.
                     </div>
                     <div class="developer-info-socials">
                         <ul class="clean-list flex justify-center">
