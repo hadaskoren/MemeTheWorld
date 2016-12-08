@@ -34,16 +34,16 @@
             <h1>Create Your Meme:</h1>
             <div class="search-memes flex space-between flex-wrap">
                 <input type="text" class="search-by-keyword" oninput="updateGallery(this.value)" placeholder="Enter a keyword">
+                <div class="toggle-gallery-display">
+                    <button class="fa fa-th-list" aria-hidden="true"></button>
+                    <button class="fa fa-th-large" aria-hidden="true"></button>
+                </div>
                 <div class="upload-by-url flex">
                     <input type="url" id="image-from-url" class="" placeholder="Paste an image URL" />
                     <input type="button" value="->" class="" onclick="imgFromUrl()" />
                 </div>
-                <!--<button class="btn btn-primary toggle-popular-keywords" onclick="togglePopularKeywords()">Popular Keywords</button>-->
-                <!--<section class="popularKeywords">-->
-                    <div class="keywords-cloud flex flex-wrap space-around">
-
-                    </div>
-                <!--</section>-->
+                <div class="keywords-cloud flex flex-wrap space-around">
+                </div>
             </div>
             <div class="memes-gallery flex flex-wrap space-around">
             </div>
@@ -71,7 +71,7 @@
                         </div>
                         <div>
                             <input class="meme-label-bottom" onkeyup="changeLabel(this,'bottom')" type="text" placeholder="Insert bottom text..."></input>
-                            <button class="delete-bottom-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
+                            <button class="delete-bottom-text   -trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
                         </div>
                         <div>
                             <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize()"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
@@ -114,12 +114,12 @@
                     </div>
                     <div class="developer-info-socials">
                         <ul class="clean-list flex justify-center">
-                            <li class="fa fa-facebook facebook"></li>
-                            <li class="fa fa-twitter twitter"></li>
-                            <li class="fa fa-google-plus google"></li>
-                            <li class="fa fa-pinterest-p pinterest"></li>
-                            <li class="fa fa-linkedin linkedin"></li>
-                            <li class="fa fa-dribbble dribble"></li>
+                            <li class="fa fa-facebook facebook" aria-hidden="true"></li>
+                            <li class="fa fa-twitter twitter" aria-hidden="true"></li>
+                            <li class="fa fa-google-plus google" aria-hidden="true"></li>
+                            <li class="fa fa-pinterest-p pinterest" aria-hidden="true"></li>
+                            <li class="fa fa-linkedin linkedin" aria-hidden="true"></li>
+                            <li class="fa fa-dribbble dribble" aria-hidden="true"></li>
                         </ul>
                     </div>
                 </div>
@@ -145,12 +145,12 @@
                     </div>
                     <div class="developer-info-socials">
                         <ul class="clean-list flex justify-center">
-                            <li class="fa fa-facebook facebook"></li>
-                            <li class="fa fa-twitter twitter"></li>
-                            <li class="fa fa-google-plus google"></li>
-                            <li class="fa fa-pinterest-p pinterest"></li>
-                            <li class="fa fa-linkedin linkedin"></li>
-                            <li class="fa fa-dribbble dribble"></li>
+                            <li class="fa fa-facebook facebook" aria-hidden="true"></li>
+                            <li class="fa fa-twitter twitter" aria-hidden="true"></li>
+                            <li class="fa fa-google-plus google" aria-hidden="true"></li>
+                            <li class="fa fa-pinterest-p pinterest" aria-hidden="true"></li>
+                            <li class="fa fa-linkedin linkedin" aria-hidden="true"></li>
+                            <li class="fa fa-dribbble dribble" aria-hidden="true"></li>
                         </ul>
                     </div>
                 </div>
