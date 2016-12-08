@@ -1,4 +1,6 @@
-
+.get-in-touch hr {
+        border-top: 1px solid #2b2b2b;
+}
 
 .get-in-touch-headline {
     display: block;
@@ -15,10 +17,12 @@
 .get-in-touch-headline h2 {
     font-size: rem(30px);
     color: var(--gray-font-primary-color);
+    margin-top: em(25px);
 }
 
 .get-in-touch .inner-container {
     border: none;
+    padding-bottom: em(20px);
 }
 
 .get-in-touch-details-extra {

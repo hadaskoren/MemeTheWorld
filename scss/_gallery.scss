@@ -1,12 +1,12 @@
-.gallery {
-  height: 724px;
-  display: block;
-  position: relative;
+.hr-wrapper hr {
+  width: 0; 
+  border-top: 1px solid #e4e9eb;
+  flex: 0 1 40%;
+  margin: 0;
 }
 
 .memes-gallery-image {
 }
-
 
 .toggle-popular-keywords {
     width: 136px;
@@ -17,7 +17,6 @@
 
 .memes-gallery {
   margin-top: em(20px);
-  
 }
 
 .popularKeywords {

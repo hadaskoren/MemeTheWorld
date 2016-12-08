@@ -1,22 +1,15 @@
+@mixin section-padding {
+  padding: em(25px) em(35px);
+
+    .inner-container {
+      padding-left: em(20px);
+      padding-right: em(20px);
+    }
+}
+
 /*----------  Containers  ----------*/
 .header {
   font-size: rem(30px);
-}
-
-.container {
-  width: var(--container-width);
-  margin: 0 auto;
-  padding: 0 1em;
-}
-
-.about {
-  background-color: #2eb398;
-  min-height: 336px;
-}
-
-.get-in-touch {
-  background-color: #323232;
-  height: 564px;
 }
 
 .inner-container {
@@ -24,9 +17,42 @@
   margin: 10% auto;
   margin-bottom: 0;
   margin-top: 0;
-  border-right: 1px solid black;
-  border-left: 1px solid black;
   height: 100%;
-  padding: 20px;
 }
+
+.gallery {
+  height: 724px;
+  display: block;
+  position: relative;
+  @include section-padding;
+
+  h1 {
+    margin-top: 0;
+    padding-top: em(15px);
+  }
+}
+
+.about {
+  background-color: #2eb398;
+  min-height: 336px;
+  @include section-padding;
+
+  .inner-container {
+    border-right: 1px solid #219d84;
+    border-left: 1px solid #219d84;
+  }
+}
+
+.get-in-touch {
+  background-color: #323232;
+  min-height: 564px;
+  @include section-padding;
+}
+
+footer {
+  background-color: #222;
+  height: 40px;
+  padding: em(15px) em(40px);
+}
+
 

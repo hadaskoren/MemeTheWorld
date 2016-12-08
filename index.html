@@ -26,14 +26,18 @@
     </nav>
 
     <section class="gallery">
+        <div class="hr-wrapper flex space-between">
+            <hr>
+            <hr>
+        </div>
         <div class="inner-container">
             <h1>Create Your Meme:</h1>
             <div class="search-memes flex space-between">
                 <input type="text" class="search-by-keyword" oninput="updateGallery(this.value)" placeholder="Enter a keyword">
                 <div class="upload-by-url flex flex-column">
                     <label for="image-from-url">Use an image from the web</label>
-                    <input type="url" id="image-from-url" class="" placeholder="Enter a URL"/>
-                    <input type="button" value="Upload" class="" onclick="memeEditor()"/>
+                    <input type="url" id="image-from-url" class="" placeholder="Enter a URL" />
+                    <input type="button" value="Upload" class="" onclick="memeEditor()" />
                 </div>
                 <button class="btn btn-primary toggle-popular-keywords" onclick="togglePopularKeywords()">Popular Keywords</button>
             </div>
@@ -86,6 +90,7 @@
                 </div>
             </section>
         </div>
+        <hr>
     </section>
 
     <section class="about">
@@ -158,8 +163,8 @@
 
     <section class="get-in-touch flex flex-wrap">
         <!--<div class="hr">-->
+        <hr>
         <div class="inner-container flex">
-            <hr></hr>
             <div>
                 <div class="get-in-touch-headline">
                     <h2>Get In Touch</h2>
@@ -189,12 +194,12 @@
                     </div>
                 </div>
             </div>
-            <hr></hr>
         </div>
+        <hr>
     </section>
     </div>
     <footer>
-        copyrights 2016 by Hadas&amp;Omer.ltd
+        &copy; copyrights 2016 by Hadas&amp;Omer.ltd
     </footer>
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
