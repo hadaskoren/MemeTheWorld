@@ -1,7 +1,6 @@
 ::-webkit-input-placeholder {
-  color: #626262;
+  color: #bebebe; 
   font-size: rem(14px);
-  font-family: var(--primary-font);
 }
 
 .get-in-touch-form {
@@ -33,10 +32,13 @@
   border: none;
   margin-bottom:3%;
   color: var(--gray-font-secondary-color);
+  font-family: LatoRegular;
 }
+
 
 .get-in-touch-form textarea {
   height: 148px;
+  resize: vertical;
 }
 
 .submit-form {
