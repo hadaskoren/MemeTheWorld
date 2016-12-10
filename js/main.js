@@ -130,6 +130,8 @@ function backToGallery() {
 //------------------------------Canvas-----------------------------------------//
 
 //---------------------Edit Meme Change label
+
+//-TODO: DRY-//
 function changeLabel(elLabel, labelLocation) {
     if (labelLocation === 'top') {
         gMeme.labels[0].txt = elLabel.value;
