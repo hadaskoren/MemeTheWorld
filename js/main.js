@@ -103,13 +103,13 @@ function memeEditor(elImgSrc) {
                     txt: '',
                     color: '#ffffff',
                     shadow: 'no',
-                    size: 68
+                    size: 30
                 },
                 {
                     txt: '',
                     color: '#ffffff',
                     shadow: 'no',
-                    size: 68
+                    size: 30
                 }
             ]
         };
@@ -122,6 +122,9 @@ function memeEditor(elImgSrc) {
     gAllElements.elMemesGallery.style.display = 'none';
     // Show editor
     gAllElements.elGalleryEditor.style.display = 'block';
+    // Making sure the previous text that was typed is deleted
+    clearInput('0');
+    clearInput('1');
 
     if (gPrevSearchKeyword) {
         updateKeywordsObj(gPrevSearchKeyword);
@@ -171,10 +174,10 @@ function drawCanvas() {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
-        gCtx.font = gMeme.labels[0].size + "px Segoe UI";
+        gCtx.font = gMeme.labels[0].size + "px Arial UI";
         gCtx.fillStyle = gMeme.labels[0].color;
         gCtx.fillText(gMeme.labels[0].txt, 45, 105);
-        gCtx.font = gMeme.labels[1].size + "px Segoe UI";
+        gCtx.font = gMeme.labels[1].size + "px Arial UI";
         gCtx.fillStyle = gMeme.labels[1].color;
         gCtx.fillText(gMeme.labels[1].txt, 45, 270);
     }
@@ -219,6 +222,8 @@ function decreaseFontSize(labelLocation) {
 }
 
 function changeFontColor(elColorPicker, labelLocation) {
+    var elColor = document.querySelector('#inputColor1');
+    elColor.style.color = elColor.value;
     var labelIndex = +labelLocation;
     console.log('I work');
     var currval = elColorPicker.value;

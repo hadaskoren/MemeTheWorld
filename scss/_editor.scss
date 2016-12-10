@@ -36,26 +36,18 @@
     }
 } 
 
-.edit-text input {
-    padding: 10px;
+.meme-label-top, .meme-label-bottom {
+    padding: em(5px);
+    height: 31px;
 }
 
-.delete-top-text {
+.delete-top-text, .delete-bottom-text {
     padding: 12px;
-}
-
-.delete-bottom-text {
-    padding: 12px;
+    padding: em(10px);
 }
 
 .save-image{
     margin: 2%;
-}
-
-.increase-font-size, .decrease-font-size{
-    border-radius: 50%;
-    border: 1px solid var(--font-secondary-color);
-    background-color: var(--font-secondary-color);
 }
 
 .delete-top-text, .delete-bottom-text {
@@ -64,9 +56,26 @@
     color: red;
 }
 
-.font-color {
-    border: 1px solid black;
-    background-color: #bebebe;
-    // color: red;
-    width: 100px;
+input .font-color {
+    padding: 0;
+    width: 10px;
+}
+
+.editor-tools {
+    width: 100%;
+    height: 31px;
+    background-color: #484444;
+    box-shadow: 0 0 8px 4px rgba(10, 10, 10, 0.25);
+    padding: em(5px);
+    color: var(--font-primary-color);
+    margin-top:3%;
+}
+
+.editor-tools button, input[type='color']{
+    background-color: #484444;
+    border: none;
+    &:hover {
+        box-shadow: 0 0 5px #51cbee;
+        border: 1px solid #51cbee; 
+    }
 }

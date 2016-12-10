@@ -77,19 +77,17 @@
                                 <input class="meme-label-top" oninput="changeLabel(this,'0')" type="text" placeholder="Insert top text..."></input>
                                 <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('0')"></button>
                             </div>
-                            <div>
+                            <div class="editor-tools">
                                 <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('0')">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 </button>
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('0')">
                                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                 </button>
-                                <input type="color" class="font-color" onchange="changeFontColor(this, '0')"></input>
+                                <input type="color" class="font-color" id="inputColor1" onchange="changeFontColor(this, '0')"></input>
                                 <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('0')">
                                     <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
                                 </button>
-                            </div>
-                            <div class="align-buttons">
                                 <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('0')">
                                     <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
                                 </button>
@@ -107,7 +105,7 @@
                                 <input class="meme-label-bottom" oninput="changeLabel(this,'1')" type="text" placeholder="Insert bottom text..."></input>
                                 <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('1')"></button>
                             </div>
-                            <div>
+                            <div class="editor-tools">
                                 <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('1')">
                                     <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
                                 </button>
@@ -118,8 +116,6 @@
                                 <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('1')">
                                     <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
                                 </button>
-                            </div>
-                            <div>
                                 <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('1')">
                                     <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
                                 </button>
