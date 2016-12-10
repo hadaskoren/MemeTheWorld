@@ -45,15 +45,14 @@
   width: 90px;
   align-self: flex-end;
   margin-bottom: 53px;
-  background-color: #2eb398;
+  background-color: var(--font-secondary-color);
   border: none;
   font-size: rem(12px);
   font-family: var(--primary-font);
-  padding: 11px 30px;
+  padding: em(11px) em(30px);
   color: var(--font-primary-color);
 
   @media (max-width: 610px) {
     margin-bottom: 20px;
   }
-
 }

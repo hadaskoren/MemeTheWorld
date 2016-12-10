@@ -45,36 +45,39 @@
         </div>
         <div class="inner-container">
             <h1>Create Your Meme:</h1>
-            <div class="search-memes flex space-between flex-wrap">
-                <input type="text" class="search-by-keyword" oninput="updateGallery(this.value)" placeholder="Enter a keyword">
-                <div class="toggle-gallery-display">
-                    <button class="fa fa-th-list" aria-hidden="true"></button>
-                    <button class="fa fa-th-large" aria-hidden="true"></button>
-                </div>
-                <div class="upload-by-url flex">
-                    <input type="url" id="image-from-url" class="" placeholder="Paste an image URL" />
-                    <button class="fa fa-cloud-download" aria-hidden="true" onclick="imgFromUrl()"></button>
+            <div class="search-view-keywords flex flex-wrap space-around">
+                <div class="search-memes flex flex-wrap space-between">
+                    <input type="text" class="search-by-keyword" oninput="updateGallery(this.value)" placeholder="Search by keyword">
+                    <div>
+                        <input type="url" id="image-from-url" class="img-from-url" placeholder="Paste an image URL" />
+                        <button class="edit-image-url-icon fa fa-cloud-download" aria-hidden="true" onclick="imgFromUrl()"></button>
+                    </div>
                 </div>
                 <div class="keywords-container flex flex-column">
-                    <h4>Most Popular Keywords:</h4>
+                    <label>Most Popular Keywords:</label>
                     <div class="keywords-cloud flex flex-wrap space-around">
                     </div>
                 </div>
             </div>
+            <div class="toggle-gallery-display">
+                <button class="list-view fa fa-th-list" aria-hidden="true"></button>
+                <button class="grid-view fa fa-th-large" aria-hidden="true"></button>
+            </div>
             <div class="memes-gallery flex flex-wrap space-around">
             </div>
+             <!--Canvas-->
             <section class="gallery-editor">
                 <div>
                     <button class="back-to-gallery btn btn-link" onclick="backToGallery()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back to list</button>
                 </div>
                 <div class="canvas-wrapper flex flex-wrap">
                     <div>
-                        <canvas class="memeCanvas">Sorry, no canvas available</canvas>
+                        <canvas class="meme-canvas img-responsive">Sorry, no canvas available</canvas>
                     </div>
                     <div class="edit-text flex flex-column space-between">
-                        <div>
+                        <div class="meme-label-top"> 
                             <div>
-                                <input class="meme-label-top" oninput="changeLabel(this,'0')" type="text" placeholder="Insert top text..."></input>
+                                <input class="meme-label-top-txt" oninput="changeLabel(this,'0')" type="text" placeholder="Insert top text..."></input>
                                 <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('0')"></button>
                             </div>
                             <div class="editor-tools">
@@ -84,8 +87,8 @@
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('0')">
                                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                 </button>
-                                <input type="color" class="font-color" id="inputColor1" onchange="changeFontColor(this, '0')"></input>
-                                <button class="font-shadow" aria-hidden="true" onclick="toggleFontShadow('0')">
+                                <input type="color" class="font-color" id="inputColor1" onchange="changeFontColor(this, '0')" value="#ffffff"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('0')">
                                     <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
                                 </button>
                                 <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('0')">
@@ -100,9 +103,9 @@
                             </div>
                         </div>
 
-                        <div>
+                        <div class="meme-label-bottom">
                             <div>
-                                <input class="meme-label-bottom" oninput="changeLabel(this,'1')" type="text" placeholder="Insert bottom text..."></input>
+                                <input class="meme-label-bottom-txt" oninput="changeLabel(this,'1')" type="text" placeholder="Insert bottom text..."></input>
                                 <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('1')"></button>
                             </div>
                             <div class="editor-tools">
@@ -112,8 +115,8 @@
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('1')">
                                     <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
                                 </button>
-                                <input type="color" class="font-color" onchange="changeFontColor(this, '1')" value="#3355cc"></input>
-                                <button class="font-shadow" aria-hidden="true" onclick="toggleFontShadow('1')">
+                                <input type="color" class="font-color" onchange="changeFontColor(this, '1')" value="#ffffff"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('1')">
                                     <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
                                 </button>
                                 <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('1')">
@@ -130,14 +133,17 @@
                     </div>
                 </div>
                 <div>
-                    <button class="save-image btn btn-info">
-                        <a href="#" onclick="saveImg(this)">Save</a>
+                    <button class="download-meme">
+                        <a href="#" onclick="saveImg(this)"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download</a>
                     </button>
                 </div>
             </section>
+            <!--End of Canvas-->
         </div>
         <hr>
     </section>
+    <!--End of Gallery-->
+
     <!--About-->
     <section class="about">
         <a name="about-anchor"></a>
@@ -205,6 +211,8 @@
             </article>
         </div>
     </section>
+    <!--End of About-->
+
     <!--Get In Touch-->
     <section class="get-in-touch flex flex-wrap">
         <a name="get-in-touch-anchor"></a>
@@ -238,6 +246,7 @@
             </div>
             <hr>
     </section>
+    <!--End of Get In Touch-->
 
     <footer>
         &copy; copyrights 2016 by Hadas&amp;Omer.ltd
