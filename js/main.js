@@ -40,7 +40,8 @@ function initApp() {
 function renderImages(images, viewType) {
     var url;
     var imgSrc;
-    images.forEach(function (image) {
+
+    images.forEach(function(image) {
         if (image.url !== "") {
             imgSrc = image.url;
         } else {
@@ -100,7 +101,7 @@ function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
     elKeyWords.innerHTML = '';
 
-    gPopularKeywords.sort(function (a, b) {
+    gPopularKeywords.sort(function(a, b) {
         return b.rating - a.rating;
     });
     for (var i = 0; i < gPopularKeywords.length && i < 15; i++) {
@@ -128,15 +129,15 @@ function memeEditor(elImgSrc) {
             imgSrc: elImgSrc,
             labels: [
                 {
-                    txt: '',
+                    txt: [],
                     color: '#ffffff',
-                    shadow: 'no',
+                    shadow: true,
                     size: 30
                 },
                 {
-                    txt: '',
+                    txt: [],
                     color: '#ffffff',
-                    shadow: 'no',
+                    shadow: true,
                     size: 30
                 }
             ]
@@ -180,21 +181,21 @@ function backToGallery() {
 
 //---------------------Edit Meme Change label
 
-//-TODO: DRY-//
-function changeLabel(elLabel, labelLocation) {
-    if (labelLocation === 'top') {
-        gMeme.labels[0].txt = elLabel.value;
-        if(gMeme.labels[0].txt.length < gElMemeCanvas.width / gMeme.labels[0].size * 2) {
-            drawCanvas();
-        }
-    } else {
-        gMeme.labels[1].txt = elLabel.value;
-        drawCanvas();
-        if(gMeme.labels[1].txt.length < gElMemeCanvas.width/gMeme.labels[1].size*2) {
-            drawCanvas();
-        }
-    }
-}
+// //-TODO: DRY-//
+// function changeLabel(elLabel, labelLocation) {
+//     if (labelLocation === 'top') {
+//         gMeme.labels[0].txt = elLabel.value;
+//         if (gMeme.labels[0].txt.length < gElMemeCanvas.width / gMeme.labels[0].size * 2) {
+//             drawCanvas();
+//         }
+//     } else {
+//         gMeme.labels[1].txt = elLabel.value;
+//         drawCanvas();
+//         if (gMeme.labels[1].txt.length < gElMemeCanvas.width / gMeme.labels[1].size * 2) {
+//             drawCanvas();
+//         }
+//     }
+// }
 
 //---------------------Init the canvas when image in gallery was clicked or recieved url from user in input
 function drawCanvas() {
@@ -202,30 +203,72 @@ function drawCanvas() {
     img.src = gMeme.imgSrc;
 
     //Draw on canvas after the image is loaded from server or from url
-    img.onload = function () {
+    img.onload = function() {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
-        gCtx.font = gMeme.labels[0].size + "px Arial UI";
-        gCtx.fillStyle = gMeme.labels[0].color;
-        gCtx.fillText(gMeme.labels[0].txt, 45, 105);
-        gCtx.font = gMeme.labels[1].size + "px Arial UI";
-        gCtx.fillStyle = gMeme.labels[1].color;
-        gCtx.fillText(gMeme.labels[1].txt, 45, 270);
+
+        for (var i = 0, lineStartY = 105; i < 2; i++ , lineStartY = 270) {
+
+            gCtx.font = gMeme.labels[i].size + "px Arial UI";
+            gCtx.shadowColor = "black";
+            gCtx.shadowBlur = 4;
+            gCtx.lineWidth = 4;
+            // console.log(' gMeme.labels[i].txt.length', i, ' length is ',  gMeme.labels[i].txt.length);
+            for (var j = 0; j < gMeme.labels[i].txt.length; j++ , lineStartY += gMeme.labels[i].size - 3) {
+                if (gMeme.labels[i].shadow) {
+                    gCtx.strokeText(gMeme.labels[i].txt[j], 45, lineStartY);
+                }
+                gCtx.shadowBlur = 0;
+                gCtx.fillStyle = gMeme.labels[i].color;
+                gCtx.fillText(gMeme.labels[i].txt[j], 45, lineStartY);
+            }
+        }
     }
 }
 
 //---------------------Edit Meme Change label
 function changeLabel(elLabel, labelLocation) {
     var labelIndex = +labelLocation;
-        if (gMeme.labels[labelIndex].txt.length < gElMemeCanvas.width / gMeme.labels[labelIndex].size * 1.4) {
-            gMeme.labels[labelIndex].txt = elLabel.value.toUpperCase();
-            drawCanvas();
+    var maxLineLength = gElMemeCanvas.width / gMeme.labels[labelIndex].size * 1.3;
+    var txtValueCaps = elLabel.value.toUpperCase();
+    var texts = gMeme.labels[labelIndex].txt;
+    if (txtValueCaps.length < maxLineLength) {
+        texts[0] = txtValueCaps;
+        console.log('less than max length');
+        // texts.push(txtValueCaps);
+        // console.log('labelIndex', labelIndex);
+        // console.log('texts', texts);
+        // console.log('gMeme.labels[labelIndex].txt', gMeme.labels[labelIndex].txt);
+        drawCanvas();
+    } else {
+        var splitStr = txtValueCaps.split(' ');
+        if (splitStr.length === 1) {
+            elLabel.value = elLabel.value.slice(0, -1);
         } else {
-            var maxLengthValue = elLabel.value.slice(0, -1);
-            elLabel.value = maxLengthValue;
-            gMeme.labels[labelIndex].txt = elLabel.value.toUpperCase();
+            for (var i = 0, lineBreak = false; i < 2; i++ , lineBreak = false) {
+                texts[i] ='';
+                var tempWord;
+                var tempLine;
+
+                while (splitStr.length > 0 && !lineBreak) {
+                    tempWord = splitStr.shift();
+                    tempLine = texts[i] + ' ' + tempWord;
+                    if (tempLine.length < maxLineLength) {
+                        texts[i] = tempLine;
+                        tempLine = '';
+                    } else {
+                        splitStr.unshift(tempWord);
+                        lineBreak = true;
+                    }
+                }
+            }
+            drawCanvas();
+
         }
+
+
+    }
 }
 
 function clearInput(labelLocation) {
@@ -236,9 +279,10 @@ function clearInput(labelLocation) {
     } else {
         input = document.querySelector('.meme-label-bottom-txt');
     }
-        input.value = "";
-        gMeme.labels[labelIndex].txt = "";
-        drawCanvas();
+    input.value = "";
+    gMeme.labels[labelIndex].txt = [];
+    gMeme.labels[labelIndex].color = '#ffffff';
+    drawCanvas();
 }
 
 function increaseFontSize(labelLocation) {
@@ -255,7 +299,6 @@ function decreaseFontSize(labelLocation) {
 
 function changeFontColor(elColorPicker, labelLocation) {
     var elColor = document.querySelector('#inputColor1');
-    elColor.style.color = elColor.value;
     var labelIndex = +labelLocation;
     console.log('I work');
     var currval = elColorPicker.value;
@@ -265,8 +308,10 @@ function changeFontColor(elColorPicker, labelLocation) {
     drawCanvas();
 }
 
-function changeFontShadow() {
-
+function toggleFontShadow(labelLocation) {
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].shadow = !gMeme.labels[labelIndex].shadow;
+    drawCanvas();
 }
 
 function alignFontRight() {
