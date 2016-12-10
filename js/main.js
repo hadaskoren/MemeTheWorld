@@ -39,8 +39,8 @@ function renderImages(images) {
     var imgSrc;
     var elMemesGallery = document.querySelector('.memes-gallery');
     images.forEach(function (image) {
-        if(image.url !== "") {
-            url = image.url;
+        if (image.url !== "") {
+            imgSrc = image.url;
         } else {
             imgSrc = imgIdToUrl(image.id);
         }
@@ -72,12 +72,12 @@ function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
     elKeyWords.innerHTML = '';
 
-    gPopularKeywords.sort(function(a, b) {
+    gPopularKeywords.sort(function (a, b) {
         return b.rating - a.rating;
     });
     for (var i = 0; i < gPopularKeywords.length && i < 15; i++) {
         elKeyWords.innerHTML += '<span onclick="searchByKeyword(this.innerText)" rel="' +
-            (+gPopularKeywords[i].rating) + '" class="flex justify-center flex-wrap align-center">' +
+            gPopularKeywords[i].rating + '" class="flex justify-center flex-wrap align-center">' +
             gPopularKeywords[i].keyword + '</span>';
     }
     $(".keywords-cloud span").tagcloud({
@@ -95,8 +95,24 @@ function searchByKeyword(keyword) {
 //---------------------Meme Editor
 function memeEditor(elImgSrc) {
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
-    if(gMeme === null) {
-        gMeme = {imgSrc: elImgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
+    if (gMeme === null) {
+        gMeme = {
+            imgSrc: elImgSrc,
+            labels: [
+                {
+                    txt: '',
+                    color: '#ffffff',
+                    shadow: 'no',
+                    size: 68
+                },
+                {
+                    txt: '',
+                    color: '#ffffff',
+                    shadow: 'no',
+                    size: 68
+                }
+            ]
+        };
     }
     gMeme.imgSrc = elImgSrc;
     // When opens the editor - intiate the canvas with the imageId that was clicked
@@ -106,6 +122,7 @@ function memeEditor(elImgSrc) {
     gAllElements.elMemesGallery.style.display = 'none';
     // Show editor
     gAllElements.elGalleryEditor.style.display = 'block';
+
     if (gPrevSearchKeyword) {
         updateKeywordsObj(gPrevSearchKeyword);
     }
@@ -126,83 +143,70 @@ function backToGallery() {
 
 //------------------------------Canvas-----------------------------------------//
 
-//---------------------Edit Meme Change label
-function changeLabel(elLabel, labelLocation) {
-    if (labelLocation === 'top') {
-        gMeme.labels[0].txt = elLabel.value;
-        if(gMeme.labels[0].txt.length < gElMemeCanvas.width / gMeme.labels[0].size * 2) {
-            drawCanvas();
-        }
-    } else {
-        gMeme.labels[1].txt = elLabel.value;
-        drawCanvas();
-        if(gMeme.labels[1].txt.length < gElMemeCanvas.width/gMeme.labels[1].size*2) {
-            drawCanvas();
-        }
-    }
-}
-
 //---------------------Init the canvas when image in gallery was clicked or recieved url from user in input
 function drawCanvas() {
     var img = new Image();
     img.src = gMeme.imgSrc;
 
     //Draw on canvas after the image is loaded from server or from url
-    img.onload = function() {
+    img.onload = function () {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
         gCtx.font = gMeme.labels[0].size + "px Segoe UI";
         gCtx.fillStyle = gMeme.labels[0].color;
-        gCtx.fillText(gMeme.labels[0].txt, 50, 105);
+        gCtx.fillText(gMeme.labels[0].txt, 45, 105);
         gCtx.font = gMeme.labels[1].size + "px Segoe UI";
         gCtx.fillStyle = gMeme.labels[1].color;
-        gCtx.fillText(gMeme.labels[1].txt, 60, 220);
+        gCtx.fillText(gMeme.labels[1].txt, 45, 270);
     }
+}
+
+//---------------------Edit Meme Change label
+function changeLabel(elLabel, labelLocation) {
+    var labelIndex = +labelLocation;
+        if (gMeme.labels[labelIndex].txt.length < gElMemeCanvas.width / gMeme.labels[labelIndex].size * 1.4) {
+            gMeme.labels[labelIndex].txt = elLabel.value.toUpperCase();
+            drawCanvas();
+        } else {
+            var maxLengthValue = elLabel.value.slice(0, -1);
+            elLabel.value = maxLengthValue;
+            gMeme.labels[labelIndex].txt = elLabel.value.toUpperCase();
+        }
 }
 
 function clearInput(labelLocation) {
     var input;
-    if (labelLocation === 'top') {
+    var labelIndex = +labelLocation;
+    if (labelIndex === 0) {
         input = document.querySelector('.meme-label-top');
-        input.value = "";
-        gMeme.labels[0].txt = "";
-        drawCanvas();
     } else {
         input = document.querySelector('.meme-label-bottom');
-        input.value = "";
-        gMeme.labels[1].txt = "";
-        drawCanvas();
     }
+        input.value = "";
+        gMeme.labels[labelIndex].txt = "";
+        drawCanvas();
 }
 
 function increaseFontSize(labelLocation) {
-    if(labelLocation === 'top') {
-        gMeme.labels[0].size += 5;
-    } else {
-        gMeme.labels[1].size += 5;
-    }
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].size += 5;
     drawCanvas();
 }
 
 function decreaseFontSize(labelLocation) {
-    if(labelLocation === 'top') {
-        gMeme.labels[0].size -= 5;
-    } else {
-        gMeme.labels[1].size -= 5;
-    }
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].size -= 5;
     drawCanvas();
 }
 
-function changeFontColor(labelLocation , el) {
+function changeFontColor(elColorPicker, labelLocation) {
+    var labelIndex = +labelLocation;
     console.log('I work');
-    var currval = el.value;
-    console.log('currval',currval);
-    if(labelLocation === 'top') {
-        gMeme.labels[0].color = currval;
-    } else {
-        gMeme.labels[1].color = currval;
-    }
+    var currval = elColorPicker.value;
+    console.log('currval', currval);
+    gMeme.labels[labelIndex].color = currval;
+
     drawCanvas();
 }
 

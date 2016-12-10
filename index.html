@@ -15,11 +15,13 @@
     <!--Nav Bar-->
     <nav class="nav-bar flex justify-center">
         <input id="nav-bar-mobile-checkbox" type="checkbox">
-        <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon">&#9776;</label>
+        <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
         <ul class="nav-bar-mobile clean-list">
             <li class="logo-img-mobile full-height flex align-center">
-                <img src="assets/img/logo.png">
-                <img class="pointy-thingy-mobile" src="assets/img/pointy-thingy.png">
+                <label for="nav-bar-mobile-checkbox">
+                    <img src="assets/img/logo.png">
+                    <img class="pointy-thingy-mobile" src="assets/img/pointy-thingy.png">
+                </label>
             </li>
         </ul>
         <ul class="nav-bar-items clean-list flex align-center space-around">
@@ -72,37 +74,61 @@
                     <div class="edit-text flex flex-column space-between">
                         <div>
                             <div>
-                                <input class="meme-label-top" onkeyup="changeLabel(this,'top')" type="text" placeholder="Insert top text..."></input>
-                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('top')"></button>
+                                <input class="meme-label-top" oninput="changeLabel(this,'0')" type="text" placeholder="Insert top text..."></input>
+                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('0')"></button>
                             </div>
                             <div>
-                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('top')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('top')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input type="color" class="font-color" onchange="changeFontColor('top', this)"></input>
-                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('top')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('0')">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('0')">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                <input type="color" class="font-color" onchange="changeFontColor(this, '0')"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('0')">
+                                    <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                                </button>
                             </div>
                             <div class="align-buttons">
-                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('top')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
-                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('top')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
-                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('top')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('0')">
+                                    <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('0')">
+                                    <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('0')">
+                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                </button>
                             </div>
                         </div>
 
                         <div>
                             <div>
-                                <input class="meme-label-bottom" onkeyup="changeLabel(this,'bottom')" type="text" placeholder="Insert bottom text..."></input>
-                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
+                                <input class="meme-label-bottom" oninput="changeLabel(this,'1')" type="text" placeholder="Insert bottom text..."></input>
+                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('1')"></button>
                             </div>
                             <div>
-                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('bottom')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('bottom')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input type="color" class="font-color" onchange="changeFontColor('bottom', this)"></input>
-                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('bottom')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('1')">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('1')">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                <input type="color" class="font-color" onchange="changeFontColor(this, '1')" value="#3355cc"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('1')">
+                                    <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                                </button>
                             </div>
                             <div>
-                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('bottom')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
-                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('bottom')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
-                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('bottom')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('1')">
+                                    <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('1')">
+                                    <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('1')">
+                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                </button>
                             </div>
                         </div>
                     </div>

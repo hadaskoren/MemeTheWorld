@@ -68,7 +68,7 @@
     text-align: center;
     cursor: pointer;
 
-    &:hover {
+    &:hover, &:focus {
       font-weight: 900;
     }
   }

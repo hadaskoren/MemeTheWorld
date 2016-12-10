@@ -70,7 +70,7 @@ var gPopularKeywords = [
         rating: 6
     }, {
         keyword: 'panda',
-        rating: 7
+        rating: 15
     }, {
         keyword: 'animal',
         rating: 9
@@ -79,6 +79,6 @@ var gPopularKeywords = [
         rating: 9
     }, {
         keyword: 'nobody got time',
-        rating: 15
+        rating: 12
     }
 ];
