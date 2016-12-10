@@ -24,6 +24,7 @@ function initApp() {
     // Assign global elements
     gAllElements.elSearchMemes = document.querySelector('.search-memes');
     gAllElements.elMemesGallery = document.querySelector('.memes-gallery');
+    gAllElements.elMemesList = document.querySelector('.memes-list');
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
     gAllElements.elToggleDisplay = document.querySelector('.toggle-gallery-display');
     gAllElements.elKeywordsContainer = document.querySelector('.keywords-container');
@@ -31,29 +32,54 @@ function initApp() {
     gElMemeCanvas = document.querySelector('.meme-canvas');
     gCtx = gElMemeCanvas.getContext('2d');
 
-    renderImages(gImages);
+    renderImages(gImages, 'gridView');
     renderPopularKeywords();
 }
 
 //---------------------Renders images into DOM from array of images objects
-function renderImages(images) {
+function renderImages(images, viewType) {
     var url;
     var imgSrc;
-    var elMemesGallery = document.querySelector('.memes-gallery');
     images.forEach(function (image) {
         if (image.url !== "") {
             imgSrc = image.url;
         } else {
             imgSrc = imgIdToUrl(image.id);
         }
-
-        // Add to DOM the HTML tags image after image
-        elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
+        if(viewType === 'gridView') {
+            // Add to DOM the HTML tags image after image
+             gAllElements.elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
             'style="background-image: url(' + imgSrc + ');" ' +
             'onclick="memeEditor(\'' + imgSrc + '\')">' +
             '<div class="hexTop"></div><div class="hexBottom"></div></div>';
+        } else {
+            gAllElements.elMemesList.innerHTML += '<div class="hexagon memes-gallery-image "' +
+            'style="background-image: url(' + imgSrc + ');" ' +
+            'onclick="memeEditor(\'' + imgSrc + '\')">' +
+            '<div class="hexTop"></div><div class="hexBottom"></div></div>';
+        }
     });
 }
+
+// //---------------------Renders images into DOM from array of images objects and add names and keywords
+// function renderImagesList(images) {
+//     var url;
+//     var imgSrc;
+//     var elMemesGallery = document.querySelector('.memes-gallery');
+//     images.forEach(function (image) {
+//         if (image.url !== "") {
+//             imgSrc = image.url;
+//         } else {
+//             imgSrc = imgIdToUrl(image.id);
+//         }
+
+//         // Add to DOM the HTML tags image after image
+//         elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
+//             'style="background-image: url(' + imgSrc + ');" ' +
+//             'onclick="memeEditor(\'' + imgSrc + '\')">' +
+//             '<div class="hexTop"></div><div class="hexBottom"></div></div>';
+//     });
+// }
 
 //---------------------Update an object with the keywords that were searched
 function updateKeywordsObj(keyword) {
