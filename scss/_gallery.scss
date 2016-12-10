@@ -96,3 +96,18 @@
   background-color: var(--font-secondary-color);
   color: var(--font-primary-color);
 }
+
+.memes-list {
+  display: flex;;
+}
+
+.img-keywords {
+  width: 100%;
+  /*background-color: blue;*/
+  margin-left: em(100px)
+}
+
+.hexagon-list-item {
+  width: 100%;
+  
+}

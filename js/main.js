@@ -32,7 +32,7 @@ function initApp() {
     gElMemeCanvas = document.querySelector('.meme-canvas');
     gCtx = gElMemeCanvas.getContext('2d');
 
-    renderImages(gImages, 'gridView');
+    renderImages(gImages, 'grid');
     renderPopularKeywords();
 }
 
@@ -41,26 +41,46 @@ function renderImages(images, viewType) {
     var url;
     var imgSrc;
 
+    gAllElements.elMemesGallery.innerHTML = "";
+    gAllElements.elMemesList.innerHTML = "";
+    
     images.forEach(function(image) {
+        
         if (image.url !== "") {
             imgSrc = image.url;
         } else {
             imgSrc = imgIdToUrl(image.id);
         }
-        if(viewType === 'gridView') {
+        if(viewType === 'grid') {
+            gAllElements.elMemesList.style.display = 'none';
+            gAllElements.elMemesGallery.style.display = 'flex';
+             
             // Add to DOM the HTML tags image after image
              gAllElements.elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
             'style="background-image: url(' + imgSrc + ');" ' +
             'onclick="memeEditor(\'' + imgSrc + '\')">' +
             '<div class="hexTop"></div><div class="hexBottom"></div></div>';
         } else {
-            gAllElements.elMemesList.innerHTML += '<div class="hexagon memes-gallery-image "' +
-            'style="background-image: url(' + imgSrc + ');" ' +
+            gAllElements.elMemesGallery.style.display = 'none';
+            gAllElements.elMemesList.style.display = 'flex';
+
+            var keyWordsList = ' ';
+            for (var i = 0; i < image.keywords.length; i++ ) {
+                keyWordsList += image.keywords[i];
+                if(i<image.keywords.length-1){
+                    keyWordsList += ', ';
+                }
+            }
+            gAllElements.elMemesList.innerHTML += '<div class="hexagon-list-item flex space-between"><div class="hexagon memes-gallery-image "' +
+            'style="background-image: url(' + imgSrc + ');" ' + 
             'onclick="memeEditor(\'' + imgSrc + '\')">' +
-            '<div class="hexTop"></div><div class="hexBottom"></div></div>';
+            '<div class="hexTop"></div><div class="hexBottom"></div></div><div class="img-keywords justify-center">'+
+            keyWordsList+'</div></div>';
+            console.log('gAllElements.elMemesList',gAllElements.elMemesList);
         }
     });
 }
+
 
 // //---------------------Renders images into DOM from array of images objects and add names and keywords
 // function renderImagesList(images) {
@@ -179,24 +199,6 @@ function backToGallery() {
 
 //------------------------------Canvas-----------------------------------------//
 
-//---------------------Edit Meme Change label
-
-// //-TODO: DRY-//
-// function changeLabel(elLabel, labelLocation) {
-//     if (labelLocation === 'top') {
-//         gMeme.labels[0].txt = elLabel.value;
-//         if (gMeme.labels[0].txt.length < gElMemeCanvas.width / gMeme.labels[0].size * 2) {
-//             drawCanvas();
-//         }
-//     } else {
-//         gMeme.labels[1].txt = elLabel.value;
-//         drawCanvas();
-//         if (gMeme.labels[1].txt.length < gElMemeCanvas.width / gMeme.labels[1].size * 2) {
-//             drawCanvas();
-//         }
-//     }
-// }
-
 //---------------------Init the canvas when image in gallery was clicked or recieved url from user in input
 function drawCanvas() {
     var img = new Image();
@@ -236,10 +238,6 @@ function changeLabel(elLabel, labelLocation) {
     if (txtValueCaps.length < maxLineLength) {
         texts[0] = txtValueCaps;
         console.log('less than max length');
-        // texts.push(txtValueCaps);
-        // console.log('labelIndex', labelIndex);
-        // console.log('texts', texts);
-        // console.log('gMeme.labels[labelIndex].txt', gMeme.labels[labelIndex].txt);
         drawCanvas();
     } else {
         var splitStr = txtValueCaps.split(' ');
@@ -264,10 +262,7 @@ function changeLabel(elLabel, labelLocation) {
                 }
             }
             drawCanvas();
-
         }
-
-
     }
 }
 
