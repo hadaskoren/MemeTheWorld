@@ -10,7 +10,8 @@
 
 .back-to-gallery {
     margin: em(5px);
-    color: #b3d0ea;
+    color: var(--font-primary-color);
+    font-size: rem(20px);
 }
 
 .edit-text{
@@ -31,14 +32,24 @@
 } 
 
 @media screen and (max-width: 630px) {
-    .gallery-editor {
-        height: 100%; 
+    .canvas-wrapper {
+        margin-right: em(10px);
+    }
+    .edit-text {
+        flex-direction : column;
+    }
+    .editor-tools {
+        margin-bottom: 6%;
+    }
+    .meme-label-top {
+        width: 80%;
     }
 } 
 
-.meme-label-top, .meme-label-bottom {
+.meme-label-top-txt, .meme-label-bottom-txt {
     padding: em(5px);
     height: 31px;
+    width: 157px;
 }
 
 .delete-top-text, .delete-bottom-text {
@@ -46,8 +57,12 @@
     padding: em(10px);
 }
 
-.save-image{
+.download-meme {
+    text-decoration: none;
     margin: 2%;
+    background-color: var(--font-secondary-color);
+    padding: em(11px);
+    color: var(--font-primary-color);
 }
 
 .delete-top-text, .delete-bottom-text {
@@ -56,15 +71,15 @@
     color: red;
 }
 
-input .font-color {
+.font-color input{
     padding: 0;
-    width: 10px;
+    width: 24px;
 }
 
 .editor-tools {
-    width: 100%;
+    width: 233px;
     height: 31px;
-    background-color: #484444;
+    background-color: #4f4e54;;
     box-shadow: 0 0 8px 4px rgba(10, 10, 10, 0.25);
     padding: em(5px);
     color: var(--font-primary-color);
@@ -72,10 +87,11 @@ input .font-color {
 }
 
 .editor-tools button, input[type='color']{
-    background-color: #484444;
+    background-color: #4f4e54;
     border: none;
     &:hover {
         box-shadow: 0 0 5px #51cbee;
         border: 1px solid #51cbee; 
     }
 }
+

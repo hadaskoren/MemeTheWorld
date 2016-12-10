@@ -25,8 +25,10 @@ function initApp() {
     gAllElements.elSearchMemes = document.querySelector('.search-memes');
     gAllElements.elMemesGallery = document.querySelector('.memes-gallery');
     gAllElements.elGalleryEditor = document.querySelector('.gallery-editor');
+    gAllElements.elToggleDisplay = document.querySelector('.toggle-gallery-display');
+    gAllElements.elKeywordsContainer = document.querySelector('.keywords-container');
     // Canvas globals
-    gElMemeCanvas = document.querySelector('.memeCanvas');
+    gElMemeCanvas = document.querySelector('.meme-canvas');
     gCtx = gElMemeCanvas.getContext('2d');
 
     renderImages(gImages);
@@ -120,6 +122,8 @@ function memeEditor(elImgSrc) {
     // Hide gallery
     gAllElements.elSearchMemes.style.display = 'none';
     gAllElements.elMemesGallery.style.display = 'none';
+    gAllElements.elToggleDisplay.style.display = 'none';
+    gAllElements.elKeywordsContainer.style.display = 'none';
     // Show editor
     gAllElements.elGalleryEditor.style.display = 'block';
     // Making sure the previous text that was typed is deleted
@@ -140,6 +144,8 @@ function backToGallery() {
     // Show gallery
     gAllElements.elSearchMemes.style.display = 'flex';
     gAllElements.elMemesGallery.style.display = 'flex';
+    gAllElements.elToggleDisplay.style.display = 'flex';
+    gAllElements.elKeywordsContainer.style.display = 'flex';
     // Hide editor
     gAllElements.elGalleryEditor.style.display = 'none';
 }
@@ -200,9 +206,9 @@ function clearInput(labelLocation) {
     var input;
     var labelIndex = +labelLocation;
     if (labelIndex === 0) {
-        input = document.querySelector('.meme-label-top');
+        input = document.querySelector('.meme-label-top-txt');
     } else {
-        input = document.querySelector('.meme-label-bottom');
+        input = document.querySelector('.meme-label-bottom-txt');
     }
         input.value = "";
         gMeme.labels[labelIndex].txt = "";

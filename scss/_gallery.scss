@@ -11,6 +11,7 @@
 }
 
 .search-memes {
+  width: 100%;
   &>input , div {
     margin: 3px 0;
   }
@@ -74,8 +75,24 @@
   }
 }
 
-.memeCanvas {
+.meme-canvas {
   width: 500px;
   height: 300px;
 }
 
+.search-by-keyword, .img-from-url {
+  width: 277px; 
+  padding: em(5px);
+}
+
+.list-view, .grid-view  {
+  padding: em(12px);
+  background-color: var(--font-secondary-color);
+  color: var(--font-primary-color);
+}
+
+.edit-image-url-icon {
+  padding: em(7px);
+  background-color: var(--font-secondary-color);
+  color: var(--font-primary-color);
+}
