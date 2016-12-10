@@ -2,8 +2,6 @@
 
 // GLOBAL elements object
 var gAllElements = {};
-// GLOBAL MODEL
-var gImages = [];
 
 // GLOBAL vars
 var gPrevSearchKeyword;
@@ -11,7 +9,6 @@ var gPrevSearchEndIndex;
 
 // GLOBALS for popular keywords
 var gIsKeywordsPanelOpen = true;
-var gPopularKeywords = {};
 var gCloudSettings;
 
 // GLOBAL meme
@@ -42,8 +39,8 @@ function renderImages(images) {
     var imgSrc;
     var elMemesGallery = document.querySelector('.memes-gallery');
     images.forEach(function (image) {
-        if(image.url !== "") {
-            url = image.url;
+        if (image.url !== "") {
+            imgSrc = image.url;
         } else {
             imgSrc = imgIdToUrl(image.id);
         }
@@ -75,12 +72,12 @@ function renderPopularKeywords() {
     var elKeyWords = document.querySelector('.keywords-cloud');
     elKeyWords.innerHTML = '';
 
-    gPopularKeywords.sort(function(a, b) {
+    gPopularKeywords.sort(function (a, b) {
         return b.rating - a.rating;
     });
     for (var i = 0; i < gPopularKeywords.length && i < 15; i++) {
         elKeyWords.innerHTML += '<span onclick="searchByKeyword(this.innerText)" rel="' +
-            (+gPopularKeywords[i].rating) + '" class="flex justify-center flex-wrap align-center">' +
+            gPopularKeywords[i].rating + '" class="flex justify-center flex-wrap align-center">' +
             gPopularKeywords[i].keyword + '</span>';
     }
     $(".keywords-cloud span").tagcloud({
@@ -98,8 +95,24 @@ function searchByKeyword(keyword) {
 //---------------------Meme Editor
 function memeEditor(elImgSrc) {
     // Once you click on an image, an object is created with Id and array of labels that has all the text features
-    if(gMeme === null) {
-        gMeme = {imgSrc: elImgSrc, labels: [{txt: '', color: '#112233', shadow: 'no',size: 30},{txt: '', color: '#112233',shadow: 'no',size: 30}]};
+    if (gMeme === null) {
+        gMeme = {
+            imgSrc: elImgSrc,
+            labels: [
+                {
+                    txt: '',
+                    color: '#ffffff',
+                    shadow: 'no',
+                    size: 68
+                },
+                {
+                    txt: '',
+                    color: '#ffffff',
+                    shadow: 'no',
+                    size: 68
+                }
+            ]
+        };
     }
     gMeme.imgSrc = elImgSrc;
     // When opens the editor - intiate the canvas with the imageId that was clicked
@@ -109,6 +122,7 @@ function memeEditor(elImgSrc) {
     gAllElements.elMemesGallery.style.display = 'none';
     // Show editor
     gAllElements.elGalleryEditor.style.display = 'block';
+
     if (gPrevSearchKeyword) {
         updateKeywordsObj(gPrevSearchKeyword);
     }
@@ -153,61 +167,64 @@ function drawCanvas() {
     img.src = gMeme.imgSrc;
 
     //Draw on canvas after the image is loaded from server or from url
-    img.onload = function() {
+    img.onload = function () {
         gElMemeCanvas.width = this.naturalWidth;
         gElMemeCanvas.height = this.naturalHeight;
         gCtx.drawImage(img, 12, 12, img.width, img.height);
         gCtx.font = gMeme.labels[0].size + "px Segoe UI";
         gCtx.fillStyle = gMeme.labels[0].color;
-        gCtx.fillText(gMeme.labels[0].txt, 50, 105);
+        gCtx.fillText(gMeme.labels[0].txt, 45, 105);
         gCtx.font = gMeme.labels[1].size + "px Segoe UI";
         gCtx.fillStyle = gMeme.labels[1].color;
-        gCtx.fillText(gMeme.labels[1].txt, 60, 220);
+        gCtx.fillText(gMeme.labels[1].txt, 45, 270);
     }
+}
+
+//---------------------Edit Meme Change label
+function changeLabel(elLabel, labelLocation) {
+    var labelIndex = +labelLocation;
+        if (gMeme.labels[labelIndex].txt.length < gElMemeCanvas.width / gMeme.labels[labelIndex].size * 1.4) {
+            gMeme.labels[labelIndex].txt = elLabel.value.toUpperCase();
+            drawCanvas();
+        } else {
+            var maxLengthValue = elLabel.value.slice(0, -1);
+            elLabel.value = maxLengthValue;
+            gMeme.labels[labelIndex].txt = elLabel.value.toUpperCase();
+        }
 }
 
 function clearInput(labelLocation) {
     var input;
-    if (labelLocation === 'top') {
+    var labelIndex = +labelLocation;
+    if (labelIndex === 0) {
         input = document.querySelector('.meme-label-top');
-        input.value = "";
-        gMeme.labels[0].txt = "";
-        drawCanvas();
     } else {
         input = document.querySelector('.meme-label-bottom');
-        input.value = "";
-        gMeme.labels[1].txt = "";
-        drawCanvas();
     }
+        input.value = "";
+        gMeme.labels[labelIndex].txt = "";
+        drawCanvas();
 }
 
 function increaseFontSize(labelLocation) {
-    if(labelLocation === 'top') {
-        gMeme.labels[0].size += 5;
-    } else {
-        gMeme.labels[1].size += 5;
-    }
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].size += 5;
     drawCanvas();
 }
 
 function decreaseFontSize(labelLocation) {
-    if(labelLocation === 'top') {
-        gMeme.labels[0].size -= 5;
-    } else {
-        gMeme.labels[1].size -= 5;
-    }
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].size -= 5;
     drawCanvas();
 }
 
-function changeFontColor(labelLocation , el) {
+function changeFontColor(elColorPicker, labelLocation) {
+    var labelIndex = +labelLocation;
     console.log('I work');
-    var currval = el.value;
-    console.log('currval',currval);
-    if(labelLocation === 'top') {
-        gMeme.labels[0].color = currval;
-    } else {
-        gMeme.labels[1].color = currval;
-    }
+    var currval = elColorPicker.value;
+    console.log('currval', currval);
+    gMeme.labels[labelIndex].color = currval;
+
     drawCanvas();
 }
 
@@ -279,87 +296,3 @@ function saveImg(elLink) {
     elLink.href = gElMemeCanvas.toDataURL();
     elLink.download = 'perfectMeme.jpg';
 }
-
-gImages = [
-    {
-        id: '1',
-        url: "",
-        keywords: ['lord', 'rings', 'mordor', 'boromir', 'human',
-            'lord of the rings', 'one does not simply']
-    },
-    {
-        id: '2',
-        url: "",
-        keywords: ['baby', 'evil', 'planning', 'laughing', 'human']
-    },
-    {
-        id: '3',
-        url: "",
-        keywords: ['fry', 'futurama', 'shut up and take my money']
-    },
-    {
-        id: '4',
-        url: "",
-        keywords: ['sweet brown', 'nobody got time for that', 'humans']
-    },
-    {
-        id: '5',
-        url: "",
-        keywords: ['dog', 'grumpy', 'funny', 'animal', 'sarcastic']
-    },
-    {
-        id: '6',
-        url: "",
-        keywords: ['animal', 'panda', 'kong fu',
-            'kong-fu', 'excited', 'aww', 'happy']
-    },
-    {
-        id: '7',
-        url: "",
-        keywords: ['star', 'wars', 'star wars', 'chewbacca',
-            'princess leia', 'kissing', 'love']
-    },
-    {
-        id: '8',
-        url: "",
-        keywords: ['animals', 'dog', 'surprised', 'shocked']
-    },
-];
-
-gPopularKeywords = [
-    {
-        keyword: 'baby',
-        rating: 2
-    },
-    {
-        keyword: 'human',
-        rating: 2
-    },
-    {
-        keyword: 'dog',
-        rating: 4
-    },
-    {
-        keyword: 'sweet brown',
-        rating: 4
-    },
-    {
-        keyword: 'futurama',
-        rating: 6
-    }, {
-        keyword: 'fry',
-        rating: 6
-    }, {
-        keyword: 'panda',
-        rating: 7
-    }, {
-        keyword: 'animal',
-        rating: 9
-    }, {
-        keyword: 'mordor',
-        rating: 9
-    }, {
-        keyword: 'nobody got time',
-        rating: 15
-    }
-];

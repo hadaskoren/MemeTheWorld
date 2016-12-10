@@ -12,20 +12,32 @@
 </head>
 
 <body onload="initApp()">
-<!--Nav Bar-->  
-    <nav class="nav-bar">
-        <!--<img class="pointy-thingy" src="assets/img/pointy-thingy.png">-->
-        <ul class="flex align-center justify-center space-between clean-list nav-bar-items">
+    <!--Nav Bar-->
+    <nav class="nav-bar flex justify-center">
+        <input id="nav-bar-mobile-checkbox" type="checkbox">
+        <label for="nav-bar-mobile-checkbox" class="nav-bar-mobile-icon fa fa-bars" aria-hidden="true"></label>
+        <ul class="nav-bar-mobile clean-list">
+            <li class="logo-img-mobile full-height flex align-center">
+                <label for="nav-bar-mobile-checkbox">
+                    <img src="assets/img/logo.png">
+                    <img class="pointy-thingy-mobile" src="assets/img/pointy-thingy.png">
+                </label>
+            </li>
+        </ul>
+        <ul class="nav-bar-items clean-list flex align-center space-around">
             <li class="nav-bar-item"><a href="#">PORTFOLIO</a></li>
             <li class="nav-bar-random-dot">&middot;</li>
-            <li class="nav-bar-item"><a href="#">ABOUT</a></li>
-            <li class="logo-img"><img src="assets/img/logo.png"></li>
+            <li class="nav-bar-item"><a href="#about-anchor">ABOUT</a></li>
+            <li class="logo-img">
+                <img src="assets/img/logo.png">
+                <img class="pointy-thingy" src="assets/img/pointy-thingy.png">
+            </li>
             <li class="nav-bar-item"><a href="#">BLOG</a></li>
             <li class="nav-bar-random-dot">&middot;</li>
-            <li class="nav-bar-item"><a href="#">GET IN TOUCH</a></li>
+            <li class="nav-bar-item"><a href="#get-in-touch-anchor">GET IN TOUCH</a></li>
         </ul>
     </nav>
-<!--Gallery-->    
+    <!--Gallery-->
     <section class="gallery">
         <div class="hr-wrapper flex space-between">
             <hr>
@@ -62,37 +74,61 @@
                     <div class="edit-text flex flex-column space-between">
                         <div>
                             <div>
-                                <input class="meme-label-top" onkeyup="changeLabel(this,'top')" type="text" placeholder="Insert top text..."></input>
-                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('top')"></button>
+                                <input class="meme-label-top" oninput="changeLabel(this,'0')" type="text" placeholder="Insert top text..."></input>
+                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('0')"></button>
                             </div>
                             <div>
-                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('top')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('top')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input type="color" class="font-color" onchange="changeFontColor('top', this)"></input>
-                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('top')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('0')">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('0')">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                <input type="color" class="font-color" onchange="changeFontColor(this, '0')"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('0')">
+                                    <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                                </button>
                             </div>
                             <div class="align-buttons">
-                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('top')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
-                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('top')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
-                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('top')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('0')">
+                                    <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('0')">
+                                    <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('0')">
+                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                </button>
                             </div>
                         </div>
 
                         <div>
                             <div>
-                                <input class="meme-label-bottom" onkeyup="changeLabel(this,'bottom')" type="text" placeholder="Insert bottom text..."></input>
-                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('buttom')"></button>
+                                <input class="meme-label-bottom" oninput="changeLabel(this,'1')" type="text" placeholder="Insert bottom text..."></input>
+                                <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('1')"></button>
                             </div>
                             <div>
-                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('bottom')"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('bottom')"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button>
-                                <input type="color" class="font-color" onchange="changeFontColor('bottom', this)"></input>
-                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('bottom')"><span class="glyphicon glyphicon-text-background" aria-hidden="true"></span></button>
+                                <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('1')">
+                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                </button>
+                                <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('1')">
+                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                </button>
+                                <input type="color" class="font-color" onchange="changeFontColor(this, '1')" value="#3355cc"></input>
+                                <button class="font-shadow" aria-hidden="true" onclick="changeFontShadow('1')">
+                                    <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
+                                </button>
                             </div>
                             <div>
-                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('bottom')"><span class="glyphicon glyphicon-align-right" aria-hidden="true"></span></button>
-                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('bottom')"><span class="glyphicon glyphicon-align-center" aria-hidden="true"></span></button>
-                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('bottom')"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span></button>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('1')">
+                                    <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('1')">
+                                    <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('1')">
+                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -106,13 +142,14 @@
         </div>
         <hr>
     </section>
-<!--About-->
+    <!--About-->
     <section class="about">
+        <a name="about-anchor"></a>
         <div class="inner-container flex flex-column">
             <article class="developer-info flex">
                 <div class="developer-info-header header-top">
                     <h2>Hadas Koren</h2>
-                    <h3>Illustrator &amp; Character Designer</h3>
+                    <h3>Full-stack Web Developer &amp; App Designer</h3>
                 </div>
                 <div class="developer-img hexagon dev-hadas">
                     <div class="hexTop"></div>
@@ -121,7 +158,7 @@
                 <div class="developer-summary flex flex-column space-between">
                     <div class="developer-info-header header-side">
                         <h2>Hadas Koren</h2>
-                        <h3>Illustrator &amp; Character Designer</h3>
+                        <h3>Full-stack Web Developer &amp; App Designer</h3>
                     </div>
                     <div class="developer-info-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur
@@ -142,7 +179,7 @@
             <article class="developer-info flex">
                 <div class="developer-info-header header-top">
                     <h2>Omer Zfira</h2>
-                    <h3>Illustrator &amp; Character Designer</h3>
+                    <h3>Full-stack Web Developer &amp; App Designer</h3>
                 </div>
                 <div class="developer-img hexagon dev-omer">
                     <div class="hexTop"></div>
@@ -151,7 +188,7 @@
                 <div class="developer-summary flex flex-column space-between">
                     <div class="developer-info-header header-side">
                         <h2>Omer Zfira</h2>
-                        <h3>Illustrator &amp; Character Designer</h3>
+                        <h3>Full-stack Web Developer &amp; App Designer</h3>
                     </div>
                     <div class="developer-info-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur adipisicing
                         elit. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Lorem ipsum dolor sit amet, consectetur
@@ -172,44 +209,40 @@
             </article>
         </div>
     </section>
-<!--Get In Touch-->
+    <!--Get In Touch-->
     <section class="get-in-touch flex flex-wrap">
-        <!--<div class="hr">-->
+        <a name="get-in-touch-anchor"></a>
         <hr>
-        <div class="inner-container flex">
-            <div>
-                <div class="get-in-touch-headline">
-                    <h2>Get In Touch</h2>
-                    <label>In order to get in touch use the contact form below:</label>
-                </div>
+        <div class="inner-container">
+            <div class="get-in-touch-headline">
+                <h2>Get In Touch</h2>
+                <label>In order to get in touch use the contact form below:</label>
+            </div>
+
+            <div class="get-in-touch-wrapper flex">
                 <div class="get-in-touch-form flex flex-column space-between">
-                    <input id="name" type="text" placeholder="Name(Required)"></input>
-                    <input id="email" type="email" placeholder="Email(Required)"></input>
+                    <input id="name" type="text" placeholder="Name (Required)"></input>
+                    <input id="email" type="email" placeholder="Email (Required)"></input>
                     <input id="subject" type="text" placeholder="Subject"></input>
                     <textarea id="msg" type="text" placeholder="Write your message here..."></textarea>
-                </div>
-                <div class="submit-contact flex flex-end">
                     <button type="submit" class="submit-form" onClick="saveContact()">SEND</button>
                 </div>
-            </div>
-            <div class="get-in-touch-details flex flex-column">
-                <div class="get-in-touch-details-extra">
-                    Quisque Hendrerit: purus dapibus, ornare nibh vitae, viverra nibh. Fusce vitae aliquam tellus. Proin sit amet volutpat libero.
-                    Nulla sed nunc et tortor luctus faucibus morbi vitae.
-                </div>
-                <div class="get-in-touch-details-contact flex">
-                    <div>
-                        <img class="iconsLocation flex" src="assets/img/3-layers.png">
+                <div class="get-in-touch-details flex flex-column">
+                    <div class="get-in-touch-details-extra">
+                        <span class="bold">Quisque Hendrerit:</span> purus dapibus, ornare nibh vitae, viverra nibh. Fusce
+                        vitae aliquam tellus. Proin sit amet volutpat libero. Nulla sed nunc et tortor luctus faucibus morbi
+                        vitae.
                     </div>
-                    <div>
-                        Elm St. 14/05 Lost City + 3528 331 86 35 info@hexalcorp.com
-                    </div>
+                    <ul class="get-in-touch-details-contact clean-list flex flex-column">
+                        <li><span class="fa fa-map-marker" aria-hidden="true"></span>Elm St. 14/05 Lost City</li>
+                        <li><span class="fa fa-phone fa-flip-horizontal" aria-hidden="true"></span>+ 3528 331 86 35</li>
+                        <li><span class="fa fa-envelope" aria-hidden="true"></span>info@hexalcorp.com</li>
+                    </ul>
                 </div>
             </div>
-        </div>
-        <hr>
+            <hr>
     </section>
-    </div>
+
     <footer>
         &copy; copyrights 2016 by Hadas&amp;Omer.ltd
     </footer>
@@ -217,6 +250,7 @@
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="js/jquery.tagcloud.js"></script>
     <script src="js/utils.js"></script>
+    <script src="js/database.js"></script>
     <script src="js/main.js"></script>
 </body>
 

@@ -25,11 +25,13 @@
 }
 
 .memes-gallery {
-  margin-top: em(20px);
+  margin-top: em(30px);
+  margin-bottom: em(50px);
     
   @media (max-width: 763px) {
    max-height: 560px;
    overflow: scroll;
+   overflow-x: hidden;
   }
 }
 
@@ -66,7 +68,7 @@
     text-align: center;
     cursor: pointer;
 
-    &:hover {
+    &:hover, &:focus {
       font-weight: 900;
     }
   }
