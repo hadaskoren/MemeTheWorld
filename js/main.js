@@ -56,10 +56,10 @@ function renderImages(images, viewType) {
             gAllElements.elMemesGallery.style.display = 'flex';
              
             // Add to DOM the HTML tags image after image
-             gAllElements.elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
-            'style="background-image: url(' + imgSrc + ');" ' +
-            'onclick="memeEditor(\'' + imgSrc + '\')">' +
-            '<div class="hexTop"></div><div class="hexBottom"></div></div>';
+            gAllElements.elMemesGallery.innerHTML += '<div class="hexagon memes-gallery-image "' +
+                'style="background-image: url(' + imgSrc + ');" ' +
+                'onclick="memeEditor(\'' + imgSrc + '\')">' +
+                '<div class="hexTop"></div><div class="hexBottom"></div></div>';
         } else {
             gAllElements.elMemesGallery.style.display = 'none';
             gAllElements.elMemesList.style.display = 'flex';
@@ -152,13 +152,21 @@ function memeEditor(elImgSrc) {
                     txt: [],
                     color: '#ffffff',
                     shadow: true,
-                    size: 30
+                    size: 30,
+                    txtAlign: {
+                        direction: 'left',
+                        distance: 45
+                    }
                 },
                 {
                     txt: [],
                     color: '#ffffff',
                     shadow: true,
-                    size: 30
+                    size: 30,
+                    txtAlign: {
+                        direction: 'left',
+                        distance: 45
+                    }
                 }
             ]
         };
@@ -216,14 +224,16 @@ function drawCanvas() {
             gCtx.shadowColor = "black";
             gCtx.shadowBlur = 4;
             gCtx.lineWidth = 4;
+            gCtx.textAlign = gMeme.labels[i].txtAlign.direction;
+
             // console.log(' gMeme.labels[i].txt.length', i, ' length is ',  gMeme.labels[i].txt.length);
             for (var j = 0; j < gMeme.labels[i].txt.length; j++ , lineStartY += gMeme.labels[i].size - 3) {
                 if (gMeme.labels[i].shadow) {
-                    gCtx.strokeText(gMeme.labels[i].txt[j], 45, lineStartY);
+                    gCtx.strokeText(gMeme.labels[i].txt[j], gMeme.labels[i].txtAlign.distance, lineStartY);
                 }
                 gCtx.shadowBlur = 0;
                 gCtx.fillStyle = gMeme.labels[i].color;
-                gCtx.fillText(gMeme.labels[i].txt[j], 45, lineStartY);
+                gCtx.fillText(gMeme.labels[i].txt[j], gMeme.labels[i].txtAlign.distance, lineStartY);
             }
         }
     }
@@ -235,9 +245,9 @@ function changeLabel(elLabel, labelLocation) {
     var maxLineLength = gElMemeCanvas.width / gMeme.labels[labelIndex].size * 1.3;
     var txtValueCaps = elLabel.value.toUpperCase();
     var texts = gMeme.labels[labelIndex].txt;
+
     if (txtValueCaps.length < maxLineLength) {
         texts[0] = txtValueCaps;
-        console.log('less than max length');
         drawCanvas();
     } else {
         var splitStr = txtValueCaps.split(' ');
@@ -245,7 +255,7 @@ function changeLabel(elLabel, labelLocation) {
             elLabel.value = elLabel.value.slice(0, -1);
         } else {
             for (var i = 0, lineBreak = false; i < 2; i++ , lineBreak = false) {
-                texts[i] ='';
+                texts[i] = '';
                 var tempWord;
                 var tempLine;
 
@@ -309,16 +319,25 @@ function toggleFontShadow(labelLocation) {
     drawCanvas();
 }
 
-function alignFontRight() {
-
+function alignFontRight(labelLocation) {
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].txtAlign.direction = 'right';
+    gMeme.labels[labelIndex].txtAlign.distance = gElMemeCanvas.width - 45;
+    drawCanvas();
 }
 
-function alignFontCenter() {
-
+function alignFontCenter(labelLocation) {
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].txtAlign.direction = 'center';
+    gMeme.labels[labelIndex].txtAlign.distance = gElMemeCanvas.width / 2;
+    drawCanvas();
 }
 
-function alignFontLeft() {
-
+function alignFontLeft(labelLocation) {
+    var labelIndex = +labelLocation;
+    gMeme.labels[labelIndex].txtAlign.direction = 'left';
+    gMeme.labels[labelIndex].txtAlign.distance = 45;
+    drawCanvas();
 }
 //------------------------------End of Canvas-----------------------------------------//
 
