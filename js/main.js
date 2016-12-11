@@ -177,6 +177,7 @@ function memeEditor(elImgSrc) {
     // Hide gallery
     gAllElements.elSearchMemes.style.display = 'none';
     gAllElements.elMemesGallery.style.display = 'none';
+    gAllElements.elMemesList.style.display = 'none';
     gAllElements.elToggleDisplay.style.display = 'none';
     gAllElements.elKeywordsContainer.style.display = 'none';
     // Show editor
