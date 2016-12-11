@@ -74,7 +74,7 @@ function renderImages(images, viewType) {
             gAllElements.elMemesList.innerHTML += '<div class="hexagon-list-item flex space-between"><div class="hexagon memes-gallery-image "' +
             'style="background-image: url(' + imgSrc + ');" ' + 
             'onclick="memeEditor(\'' + imgSrc + '\')">' +
-            '<div class="hexTop"></div><div class="hexBottom"></div></div><div class="img-keywords justify-center">'+
+            '<div class="hexTop"></div><div class="hexBottom"></div></div><div class="img-keywords flex align-center">'+
             keyWordsList+'</div></div>';
             console.log('gAllElements.elMemesList',gAllElements.elMemesList);
         }
