@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Meme Generator</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">-->
     <link rel="stylesheet" href="dist/style.css">
     <link rel="stylesheet" href="assets/fonts/font-awesome/css/font-awesome.min.css">
 </head>
@@ -74,44 +74,46 @@
 
                     </div>
                     <div class="image-description">
-                        
+
                     </div>
                 </div>
             </div>
-             <!--Canvas-->
+            <!--Canvas-->
             <section class="gallery-editor">
                 <div>
-                    <button class="back-to-gallery btn btn-link" onclick="backToGallery()"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>  Back to list</button>
+                    <button class="back-to-gallery" onclick="backToGallery()">
+                        <span class="fa fa-long-arrow-left" aria-hidden="true"></span>  Back to list
+                    </button>
                 </div>
                 <div class="canvas-wrapper flex flex-wrap">
                     <div>
                         <canvas class="meme-canvas img-responsive">Sorry, no canvas available</canvas>
                     </div>
                     <div class="edit-text flex flex-column space-between">
-                        <div class="meme-label-top"> 
+                        <div class="meme-label-top">
                             <div>
                                 <input class="meme-label-top-txt" oninput="changeLabel(this,'0')" type="text" placeholder="Insert top text..."></input>
                                 <button class="delete-top-text fa fa-trash-o" aria-hidden="true" onclick="clearInput('0')"></button>
                             </div>
                             <div class="editor-tools">
                                 <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('0')">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('0')">
-                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                    <span class="fa fa-minus" aria-hidden="true"></span>
                                 </button>
                                 <input type="color" class="font-color" id="inputColor1" onchange="changeFontColor(this, '0')" value="#ffffff"></input>
                                 <button class="font-shadow" aria-hidden="true" onclick="toggleFontShadow('0')">
-                                    <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
-                                </button>
-                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('0')">
-                                    <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
-                                </button>
-                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('0')">
-                                    <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                                    <span class="fa fa-buysellads" aria-hidden="true"></span>
                                 </button>
                                 <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('0')">
-                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                    <span class="fa fa-align-left" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('0')">
+                                    <span class="fa fa-align-center" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('0')">
+                                    <span class="fa fa-align-right" aria-hidden="true"></span>
                                 </button>
                             </div>
                         </div>
@@ -123,23 +125,23 @@
                             </div>
                             <div class="editor-tools">
                                 <button class="increase-font-size" aria-hidden="true" onclick="increaseFontSize('1')">
-                                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+                                    <span class="fa fa-plus" aria-hidden="true"></span>
                                 </button>
                                 <button class="decrease-font-size" aria-hidden="true" onclick="decreaseFontSize('1')">
-                                    <span class="glyphicon glyphicon-minus" aria-hidden="true"></span>
+                                    <span class="fa fa-minus" aria-hidden="true"></span>
                                 </button>
-                                <input type="color" class="font-color" onchange="changeFontColor(this, '1')" value="#ffffff"></input>
+                                <input type="color" class="font-color" id="inputColor1" onchange="changeFontColor(this, '1')" value="#ffffff"></input>
                                 <button class="font-shadow" aria-hidden="true" onclick="toggleFontShadow('1')">
-                                    <span class="glyphicon glyphicon-text-background" aria-hidden="true"></span>
-                                </button>
-                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('1')">
-                                    <span class="glyphicon glyphicon-align-right" aria-hidden="true"></span>
-                                </button>
-                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('1')">
-                                    <span class="glyphicon glyphicon-align-center" aria-hidden="true"></span>
+                                    <span class="fa fa-buysellads" aria-hidden="true"></span>
                                 </button>
                                 <button class="font-align-left" aria-hidden="true" onclick="alignFontLeft('1')">
-                                    <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                    <span class="fa fa-align-left" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-center" aria-hidden="true" onclick="alignFontCenter('1')">
+                                    <span class="fa fa-align-center" aria-hidden="true"></span>
+                                </button>
+                                <button class="font-align-right" aria-hidden="true" onclick="alignFontRight('1')">
+                                    <span class="fa fa-align-right" aria-hidden="true"></span>
                                 </button>
                             </div>
                         </div>
@@ -147,7 +149,7 @@
                 </div>
                 <div>
                     <button class="download-meme">
-                        <a href="#" onclick="saveImg(this)"><span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span> Download</a>
+                        <a href="#" onclick="saveImg(this)"><span class="fa fa-download" aria-hidden="true"></span> Download</a>
                     </button>
                 </div>
             </section>

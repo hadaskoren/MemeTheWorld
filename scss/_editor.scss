@@ -8,12 +8,6 @@
     box-shadow: 0 0 8px 4px rgba(120, 120, 120, 0.75);
 }
 
-.back-to-gallery {
-    margin: em(5px);
-    color: var(--font-primary-color);
-    font-size: rem(20px);
-}
-
 .edit-text{
     width: 30%;
     margin: 3%;
@@ -57,18 +51,20 @@
     padding: em(10px);
 }
 
-.download-meme {
+.download-meme, .back-to-gallery {
     text-decoration: none;
     margin: 2%;
     background-color: var(--font-secondary-color);
     padding: em(11px);
     color: var(--font-primary-color);
+    cursor: pointer;
 }
 
 .delete-top-text, .delete-bottom-text {
     border: 1px solid black;
     background-color: #bebebe;
     color: red;
+    cursor: pointer;
 }
 
 .font-color input{
@@ -89,9 +85,14 @@
 .editor-tools button, input[type='color']{
     background-color: #4f4e54;
     border: none;
+    color: var(--font-primary-color);
+    cursor: pointer;
     &:hover {
         box-shadow: 0 0 5px #51cbee;
         border: 1px solid #51cbee; 
     }
 }
 
+.with-shadow {
+    background-color: black;
+}
